@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TranMinhThienWPF"
         mc:Ignorable="d"
-        Title="Login" Height="500" Width="800"
+        Title="Login" Height="550" Width="800"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen" >
     <Border BorderThickness="2">
@@ -32,7 +32,7 @@
             <Border Grid.Column="0" Background="#FF07A0" CornerRadius="0,50,0,0">
                 <StackPanel Margin="0,50,0,0">
                     <TextBlock Foreground="White" TextAlignment="Center" FontSize="30" FontWeight="Heavy" TextWrapping="Wrap">Welcome</TextBlock>
-                    <TextBlock x:Name="UserDisplayName" Foreground="White" TextAlignment="Center" FontSize="20" FontWeight="Light" TextWrapping="Wrap" Margin="0,10,0,0">Tran Thien</TextBlock>
+                    <TextBlock x:Name="UserDisplayName" Foreground="White" TextAlignment="Center" FontSize="20" FontWeight="Light" TextWrapping="Wrap" Margin="0,10,0,0" >Tran Thien</TextBlock>
 
                     <Separator Width="180" Margin="0,50,0,0"></Separator>
                     <Button Content="Update Profile" Foreground="Azure" FontWeight="Medium"
@@ -64,22 +64,22 @@
                 </StackPanel>
             </Border>
 
-            <Border Grid.Column="1">
+            <Border Grid.Column="1" Grid.ColumnSpan="2">
                 <StackPanel>
                     <TextBlock Height="40" FontSize="30" Foreground="White" TextAlignment="Left" Margin="0,20,0,0" Width="501">Order Histories</TextBlock>
                     <ListView x:Name="OrderView" Background="#E5E8F5" Height="200" Width="500">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Oder ID" Width="50" DisplayMemberBinding="{Binding ProductId}"/>
-                                <GridViewColumn Header="Oder Day" Width="125" DisplayMemberBinding="{Binding ProductName}"/>
-                                <GridViewColumn Header="Shipped Day" Width="125" DisplayMemberBinding="{Binding CategoryId}"/>
-                                <GridViewColumn Header="Total" Width="100" DisplayMemberBinding="{Binding UnitsInStock}"/>
-                                <GridViewColumn Header="Order Status" Width="100" DisplayMemberBinding="{Binding UnitPrice}"/>
+                                <GridViewColumn Header="Oder ID" Width="50" DisplayMemberBinding="{Binding OrderId}"/>
+                                <GridViewColumn Header="Oder Day" Width="125" DisplayMemberBinding="{Binding OrderDate}"/>
+                                <GridViewColumn Header="Shipped Day" Width="125" DisplayMemberBinding="{Binding ShippedDate}"/>
+                                <GridViewColumn Header="Total" Width="100" DisplayMemberBinding="{Binding Total}"/>
+                                <GridViewColumn Header="Order Status" Width="100" DisplayMemberBinding="{Binding OrderStatus}"/>
 
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    
+
                     <TextBlock Height="40" FontSize="30" Foreground="White" TextAlignment="Left" Margin="0,20,0,0" Width="499">Order Detail</TextBlock>
                     <ListView x:Name="OrderDetailView" Background="#E5E8F5" Height="140" Width="500">
                         <ListView.View>

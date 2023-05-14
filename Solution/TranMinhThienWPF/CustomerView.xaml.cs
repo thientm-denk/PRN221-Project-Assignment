@@ -1,17 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using BussinessObject.Models;
+using Repositories;
 using Repositories.Implementation;
 
 namespace TranMinhThienWPF
@@ -23,22 +14,38 @@ namespace TranMinhThienWPF
     {
         #region Attributes
 
-        private Customer _user;
-        private List<Order> _orders;
-        private List<OrderDetail> _orderDetails;
-        private List<FlowerBouquet>   _flowerBouquets;
-        private OrderRepository       _orderRepository;
-        private OrderDetailRepository _orderDetailRepository;
-        private FlowerBouquetRepository _flowerBouquetRepository;
+        private Customer          _user;
+        private List<Order>       _orders = new List<Order>();
+        private List<OrderDetail> _orderDetails = new List<OrderDetail>();
+        private List<FlowerBouquet>   _flowerBouque = new List<FlowerBouquet>();
+        private IOrderRepository _orderRepository = new OrderRepository();
+        private IOrderDetailRepository _orderDetailRepository = new OrderDetailRepository();
+        private IFlowerBouquetRepository _flowerBouquetRepository = new FlowerBouquetRepository();
 
         #endregion
         
         public CustomerView(Customer user)
         {
-            _user = user;
             InitializeComponent();
+            _user = user;
+            UserDisplayName.Text = user.CustomerName;
+            
+            LoadDataOrder();
+            UpdateOrderListView();
         }
 
+        private void UpdateOrderListView()
+        {
+            if (_orders != null)
+            {
+                OrderView.ItemsSource = _orders;
+            }
+            else
+            {
+                MessageBox.Show("You do not have any order", "Message");
+            }
+            
+        }
         
         #region Repositories interaction
 
@@ -76,7 +83,6 @@ namespace TranMinhThienWPF
                 MessageBox.Show(e.Message, "ERROR");
                 return "";
             }
-            return "";
         }
 
         #endregion

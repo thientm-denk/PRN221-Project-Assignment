@@ -3,7 +3,7 @@ using BussinessObject.Models;
 
 namespace Repositories
 {
-    public interface IOderRepository
+    public interface IOrderRepository
     {
         public List<Order> GetOrdersByCustomer(int customerId);
     }

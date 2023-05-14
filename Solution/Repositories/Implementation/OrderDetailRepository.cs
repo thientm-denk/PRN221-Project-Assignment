@@ -4,7 +4,7 @@ using DataAccessObject;
 
 namespace Repositories.Implementation
 {
-    public class OrderDetailRepository : IOderDetailRepository
+    public class OrderDetailRepository : IOrderDetailRepository
     {
         public List<OrderDetail> GetOrderDetailById(int orderId)
         {
