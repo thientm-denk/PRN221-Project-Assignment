@@ -22,6 +22,7 @@ namespace TranMinhThienWPF
 
         private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            // click to drage form to anywhere
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 DragMove();
