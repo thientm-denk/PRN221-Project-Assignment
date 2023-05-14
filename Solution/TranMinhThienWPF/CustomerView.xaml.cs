@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BussinessObject.Models;
 
 namespace TranMinhThienWPF
 {
@@ -19,9 +20,19 @@ namespace TranMinhThienWPF
     /// </summary>
     public partial class CustomerView : Window
     {
-        public CustomerView()
+        private Customer _user;
+
+        public CustomerView(Customer user)
         {
+            _user = user;
             InitializeComponent();
         }
+
+        private void OnClickUpdate(object sender, RoutedEventArgs e)
+        {
+
+        }
+        
+        
     }
 }
