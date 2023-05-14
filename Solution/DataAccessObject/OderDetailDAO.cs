@@ -5,12 +5,12 @@ using BussinessObject.Models;
 
 namespace DataAccessObject
 {
-    public class OderDetailDAO
+    public class OderDetailDao
     {
-        private static OderDetailDAO instance = null;
+        private static OderDetailDao instance = null;
         private static object instanceLook = new object();
 
-        public static OderDetailDAO Instance
+        public static OderDetailDao Instance
         {
             get
             {
@@ -18,7 +18,7 @@ namespace DataAccessObject
                 {
                     if (instance == null)
                     {
-                        instance = new OderDetailDAO();
+                        instance = new OderDetailDao();
                     }
                     return instance;
                 }
