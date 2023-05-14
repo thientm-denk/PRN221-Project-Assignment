@@ -35,8 +35,6 @@ namespace BussinessObject.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
-
             modelBuilder.Entity<Category>(entity =>
             {
                 entity.ToTable("Category");

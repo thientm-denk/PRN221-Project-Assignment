@@ -29,9 +29,34 @@ namespace Repositories.Implementation
             return CustomerDAO.Instance.GetCustomerByInformation(id, email, cusName, city, county, birthday);
         }
 
-        public void Login(string email, string password)
+        public Customer Login(string email, string password)
         {
-            throw new NotImplementedException();
+            // Check for admin
+            if (false)
+            {
+                return new Customer()
+                {
+                    CustomerId = -1
+                };
+            }
+            // Customer login
+            var customerList = CustomerDAO.Instance.GetAllCustomer();
+            foreach (var cus in customerList)
+            {
+                // Check for email if not -> next customer
+                if (cus.Email != email)
+                {
+                    continue;
+                }
+                // Check password, if valid --> Return cus
+                if (cus.Password == password)
+                {
+                    return cus;
+                }
+                
+            }
+            
+            return null;
         }
     }
 }

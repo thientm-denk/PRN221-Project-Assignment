@@ -1,28 +1,49 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Input;
+using Repositories.Implementation;
 
 namespace TranMinhThienWPF
 {
     public partial class Login : Window
     {
+        private CustomerRepository _customerRepository = new CustomerRepository();
+        
         public Login()
         {
             InitializeComponent();
         }
 
-        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        private void OnClickLogin(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void btnClose_Click(object sender, RoutedEventArgs e)
-        {
-
+            try
+            {
+                var user = _customerRepository.Login(Email.Text, Password.Password.ToString());
+                if (user != null)
+                {
+                    if (user.CustomerId == -1)
+                    {
+                        MessageBox.Show("Hello Admin", "Hi");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Hello User", "Hi");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Wrong email or password", "Alert");
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, "ERROR");
+            }
         }
 
         private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            // click to drage form to anywhere
+            // click to drag form to anywhere
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 DragMove();

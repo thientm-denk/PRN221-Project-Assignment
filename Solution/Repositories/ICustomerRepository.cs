@@ -13,6 +13,6 @@ namespace Repositories
         public List<Customer> GetCustomerByInformation(int? id, string? email, string? cusName, string? city,
             string? county, DateTime? birthday);
 
-        public void Login(string email, string password);
+        public Customer Login(string email, string password);
     }
 }

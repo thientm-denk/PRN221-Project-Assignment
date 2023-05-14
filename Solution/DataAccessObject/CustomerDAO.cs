@@ -27,6 +27,11 @@ namespace DataAccessObject
 
         FUFlowerBouquetManagementContext context = new FUFlowerBouquetManagementContext();
 
+        public List<Customer> GetAllCustomer()
+        {
+            return context.Customers.ToList();
+        }
+
         public void AddCustomer(Customer customer)
         {
             context.Customers.Update(customer);
