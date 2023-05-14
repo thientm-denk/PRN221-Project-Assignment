@@ -6,9 +6,9 @@ namespace Repositories.Implementation
 {
     public class OrderDetailRepository : IOderDetailRepository
     {
-        public List<OrderDetail> GetOrdersByCustomer(int orderId)
+        public List<OrderDetail> GetOrderDetailById(int orderId)
         {
-            return OderDetailDao.Instance.GetOrdersByCustomer(orderId);
+            return OderDetailDao.Instance.GetOrderDetailByOrderId(orderId);
         }
     }
 }

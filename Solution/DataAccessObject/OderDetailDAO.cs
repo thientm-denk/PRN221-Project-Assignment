@@ -26,7 +26,7 @@ namespace DataAccessObject
         }
         
         private FUFlowerBouquetManagementContext _context = new FUFlowerBouquetManagementContext();
-        public List<OrderDetail> GetOrdersByCustomer(int orderId)
+        public List<OrderDetail> GetOrderDetailByOrderId(int orderId)
         {
             return _context.OrderDetails.Where(o => o.OrderId == orderId).ToList();
         }

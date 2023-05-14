@@ -5,6 +5,6 @@ namespace Repositories
 {
     public interface IOderDetailRepository
     {
-        public List<OrderDetail> GetOrdersByCustomer(int orderId);
+        public List<OrderDetail> GetOrderDetailById(int orderId);
     }
 }

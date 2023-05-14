@@ -31,6 +31,9 @@ namespace DataAccessObject
         {
             return _context.FlowerBouquets.ToList();
         } 
-        
+        public string GetFlowerName(int id)
+        {
+            return _context.FlowerBouquets.Where(p => p.FlowerBouquetId == id).ToList()[0].FlowerBouquetName;
+        } 
     }
 }

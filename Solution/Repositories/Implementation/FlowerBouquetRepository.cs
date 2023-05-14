@@ -10,5 +10,10 @@ namespace Repositories.Implementation
         {
             return FlowerBouquetDAO.Instance.GetAllFlower();
         }
+
+        public string GetFlowerName(int id)
+        {
+            return FlowerBouquetDAO.Instance.GetFlowerName(id);
+        }
     }
 }

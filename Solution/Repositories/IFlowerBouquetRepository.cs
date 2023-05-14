@@ -6,5 +6,6 @@ namespace Repositories
     public interface IFlowerBouquetRepository
     {
         public List<FlowerBouquet> GetAllFlower();
+        public string GetFlowerName(int id);
     }
 }

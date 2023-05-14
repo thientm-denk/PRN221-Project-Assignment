@@ -67,7 +67,7 @@
             <Border Grid.Column="1">
                 <StackPanel>
                     <TextBlock Height="40" FontSize="30" Foreground="White" TextAlignment="Left" Margin="0,20,0,0" Width="501">Order Histories</TextBlock>
-                    <ListView Background="#E5E8F5" Height="200" Width="500">
+                    <ListView x:Name="OrderView" Background="#E5E8F5" Height="200" Width="500">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Oder ID" Width="50" DisplayMemberBinding="{Binding ProductId}"/>
@@ -81,7 +81,7 @@
                     </ListView>
                     
                     <TextBlock Height="40" FontSize="30" Foreground="White" TextAlignment="Left" Margin="0,20,0,0" Width="499">Order Detail</TextBlock>
-                    <ListView Background="#E5E8F5" Height="140" Width="500">
+                    <ListView x:Name="OrderDetailView" Background="#E5E8F5" Height="140" Width="500">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Order ID" Width="50" DisplayMemberBinding="{Binding ProductId}"/>
