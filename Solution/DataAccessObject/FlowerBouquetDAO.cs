@@ -6,7 +6,24 @@ using System.Threading.Tasks;
 
 namespace DataAccessObject
 {
-    internal class FlowerBouquet
+    public class FlowerBouquetDAO
     {
+        private static FlowerBouquetDAO instance = null;
+        private static object instanceLook = new object();
+
+        public static FlowerBouquetDAO Instance
+        {
+            get
+            {
+                lock (instanceLook)
+                {
+                    if (instance == null)
+                    {
+                        instance = new FlowerBouquetDAO();
+                    }
+                    return instance;
+                }
+            }
+        }
     }
 }

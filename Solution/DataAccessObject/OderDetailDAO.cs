@@ -6,7 +6,24 @@ using System.Threading.Tasks;
 
 namespace DataAccessObject
 {
-    internal class OderDetail
+    public class OderDetailDAO
     {
+        private static OderDetailDAO instance = null;
+        private static object instanceLook = new object();
+
+        public static OderDetailDAO Instance
+        {
+            get
+            {
+                lock (instanceLook)
+                {
+                    if (instance == null)
+                    {
+                        instance = new OderDetailDAO();
+                    }
+                    return instance;
+                }
+            }
+        }
     }
 }

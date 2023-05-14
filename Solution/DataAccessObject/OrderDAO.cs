@@ -6,7 +6,24 @@ using System.Threading.Tasks;
 
 namespace DataAccessObject
 {
-    internal class OrderDAO
+    public class OrderDAO
     {
+        private static OrderDAO instance = null;
+        private static object instanceLook = new object();
+
+        public static OrderDAO Instance
+        {
+            get
+            {
+                lock (instanceLook)
+                {
+                    if (instance == null)
+                    {
+                        instance = new OrderDAO();
+                    }
+                    return instance;
+                }
+            }
+        }
     }
 }
