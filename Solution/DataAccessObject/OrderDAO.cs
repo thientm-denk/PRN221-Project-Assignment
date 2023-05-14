@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BussinessObject.Models;
 
 namespace DataAccessObject
 {
@@ -25,5 +26,13 @@ namespace DataAccessObject
                 }
             }
         }
+
+        private FUFlowerBouquetManagementContext _context = new FUFlowerBouquetManagementContext();
+        public List<Order> GetOrdersByCustomer(int customerId)
+        {
+            return _context.Orders.Where(o => o.CustomerId == customerId).ToList();
+        }
+        
+        
     }
 }
