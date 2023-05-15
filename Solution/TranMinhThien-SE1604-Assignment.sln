@@ -5,11 +5,11 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BussinessObject", "BussinessObject\BussinessObject.csproj", "{0EFFD56E-BA6B-4B32-812D-CFD29A37393B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessObject", "DataAccessObject\DataAccessObject.csproj", "{0BBDB301-99BB-4BD1-9628-80E3806AD240}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessObject", "DataAccessObject\DataAccessObject.csproj", "{0BBDB301-99BB-4BD1-9628-80E3806AD240}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositories\Repositories.csproj", "{56E6493C-C27A-4A45-AE8B-19A2DA15F9F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "Repositories\Repositories.csproj", "{56E6493C-C27A-4A45-AE8B-19A2DA15F9F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TranMinhThienWPF", "TranMinhThienWPF\TranMinhThienWPF.csproj", "{73B0E251-BA89-4394-A076-9B1F47EE35EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TranMinhThienWPF", "TranMinhThienWPF\TranMinhThienWPF.csproj", "{73B0E251-BA89-4394-A076-9B1F47EE35EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
