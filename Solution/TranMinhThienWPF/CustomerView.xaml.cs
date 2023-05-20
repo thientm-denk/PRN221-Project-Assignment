@@ -25,15 +25,28 @@ namespace TranMinhThienWPF
 
         private int _orderSlectedIndex = -1;
         #endregion
-
+        public CustomerView()
+        {
+            InitializeComponent();
+        }
         public CustomerView(Customer user)
         {
             InitializeComponent();
             _user = user;
             UserDisplayName.Text = user.CustomerName;
-
-            LoadDataOrder();
-            UpdateOrderListView();
+        }
+        // Validation
+        private void Awake(object sender, RoutedEventArgs e)
+        {
+            if (_user == null || _user.CustomerId == -1)
+            {
+                LogOut();
+            }
+            else
+            {
+                LoadDataOrder();
+                UpdateOrderListView();
+            }
         }
         // Order
         private void LoadDataOrder()
@@ -129,9 +142,10 @@ namespace TranMinhThienWPF
             }
          
         }
+
         #endregion
 
-
+        
     }
 
 

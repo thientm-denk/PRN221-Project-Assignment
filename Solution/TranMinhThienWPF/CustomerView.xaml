@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="Login" Height="550" Width="800"
         ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen" >
+        WindowStartupLocation="CenterScreen"
+        Loaded="Awake">
     <Border BorderThickness="2">
         <Border.BorderBrush>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
