@@ -132,6 +132,24 @@ GO
 INSERT [dbo].[Customer] ([CustomerID], [Email], [CustomerName], [City], [Country], [Password], [Birthday]) VALUES (3, N'RobertCapshaw@fuflowerbouquetsystem.com', N'Robert Capshaw', N'London', N'UK', N'1', CAST(N'1988-05-09' AS Date))
 GO
 
+INSERT [dbo].[Customer] ([CustomerID], [Email], [CustomerName], [City], [Country], [Password], [Birthday]) VALUES (4, N'TracyNguyen@fuflowerbouquetsystem.com', N'Tracy Nguyễn', N'Hanoi', N'Viet Nam', N'1', CAST(N'1995-11-20' AS Date))
+GO
+INSERT [dbo].[Customer] ([CustomerID], [Email], [CustomerName], [City], [Country], [Password], [Birthday]) VALUES (5, N'LindaTran@fuflowerbouquetsystem.com', N'Linda Trần', N'Da Nang', N'Viet Nam', N'1', CAST(N'1992-07-15' AS Date))
+GO
+INSERT [dbo].[Customer] ([CustomerID], [Email], [CustomerName], [City], [Country], [Password], [Birthday]) VALUES (6, N'JamesWong@fuflowerbouquetsystem.com', N'James Wong', N'Kuala Lumpur', N'Malaysia', N'1', CAST(N'1993-12-28' AS Date))
+GO
+INSERT [dbo].[Customer] ([CustomerID], [Email], [CustomerName], [City], [Country], [Password], [Birthday]) VALUES (7, N'SophiaLee@fuflowerbouquetsystem.com', N'Sophia Lee', N'Seoul', N'South Korea', N'1', CAST(N'1998-03-10' AS Date))
+GO
+INSERT [dbo].[Customer] ([CustomerID], [Email], [CustomerName], [City], [Country], [Password], [Birthday]) VALUES (8, N'MichaelGarcia@fuflowerbouquetsystem.com', N'Michael Garcia', N'Los Angeles', N'USA', N'1', CAST(N'1991-09-18' AS Date))
+GO
+INSERT [dbo].[Customer] ([CustomerID], [Email], [CustomerName], [City], [Country], [Password], [Birthday]) VALUES (9, N'MariaSantos@fuflowerbouquetsystem.com', N'Maria Santos', N'Madrid', N'Spain', N'1', CAST(N'1997-06-07' AS Date))
+GO
+INSERT [dbo].[Customer] ([CustomerID], [Email], [CustomerName], [City], [Country], [Password], [Birthday]) VALUES (10, N'AhmedAli@fuflowerbouquetsystem.com', N'Ahmed Ali', N'Cairo', N'Egypt', N'1', CAST(N'1994-04-25' AS Date))
+GO
+INSERT [dbo].[Customer] ([CustomerID], [Email], [CustomerName], [City], [Country], [Password], [Birthday]) VALUES (11, N'KarinSchmidt@fuflowerbouquetsystem.com', N'Karin Schmidt', N'Berlin', N'Germany', N'1', CAST(N'1996-08-12' AS Date))
+GO
+INSERT [dbo].[Customer] ([CustomerID], [Email], [CustomerName], [City], [Country], [Password], [Birthday]) VALUES (12, N'JuanLopez@fuflowerbouquetsystem.com', N'Juan López', N'Mexico City', N'Mexico', N'1', CAST(N'1990-01-07' AS Date))
+GO
 
 INSERT [dbo].[FlowerBouquet] ([FlowerBouquetID], [CategoryID], [FlowerBouquetName], [Description], [UnitPrice], [UnitsInStock], [FlowerBouquetStatus], [SupplierID]) VALUES (1, 1, N'A New Day', N'Flowers to put a smile on their face. Let them know that you''re thinking of them with this fun petite collection of flowers and foliage to send same day. ', 100.0000, 10, 1, 1)
 GO
@@ -157,7 +175,25 @@ GO
 INSERT [dbo].[Order] ([OrderID], [CustomerID], [OrderDate], [ShippedDate], [Total], [OrderStatus]) VALUES (4002, 1, CAST(N'2023-04-29T00:00:00.000' AS DateTime), CAST(N'2023-04-30T00:00:00.000' AS DateTime), 510.0000, N'Done')
 GO
 
+INSERT [dbo].[Order] ([OrderID], [CustomerID], [OrderDate], [ShippedDate], [Total], [OrderStatus]) VALUES (4003, 3, CAST(N'2023-05-01T00:00:00.000' AS DateTime), CAST(N'2023-05-02T00:00:00.000' AS DateTime), 720.0000, N'Done')
+GO
+INSERT [dbo].[Order] ([OrderID], [CustomerID], [OrderDate], [ShippedDate], [Total], [OrderStatus]) VALUES (4004, 4, CAST(N'2023-05-02T00:00:00.000' AS DateTime), CAST(N'2023-05-03T00:00:00.000' AS DateTime), 420.0000, N'Done')
+GO
+INSERT [dbo].[Order] ([OrderID], [CustomerID], [OrderDate], [ShippedDate], [Total], [OrderStatus]) VALUES (4005, 5, CAST(N'2023-05-03T00:00:00.000' AS DateTime), CAST(N'2023-05-04T00:00:00.000' AS DateTime), 550.0000, N'Done')
+GO
 
+INSERT [dbo].[OrderDetail] ([OrderID], [FlowerBouquetID], [UnitPrice], [Quantity], [Discount]) VALUES (4003, 2, 120.0000, 3, 0)
+GO
+INSERT [dbo].[OrderDetail] ([OrderID], [FlowerBouquetID], [UnitPrice], [Quantity], [Discount]) VALUES (4003, 4, 140.0000, 2, 0)
+GO
+INSERT [dbo].[OrderDetail] ([OrderID], [FlowerBouquetID], [UnitPrice], [Quantity], [Discount]) VALUES (4004, 1, 100.0000, 2, 0)
+GO
+INSERT [dbo].[OrderDetail] ([OrderID], [FlowerBouquetID], [UnitPrice], [Quantity], [Discount]) VALUES (4004, 5, 190.0000, 1, 0)
+GO
+INSERT [dbo].[OrderDetail] ([OrderID], [FlowerBouquetID], [UnitPrice], [Quantity], [Discount]) VALUES (4005, 3, 230.0000, 2, 0)
+GO
+INSERT [dbo].[OrderDetail] ([OrderID], [FlowerBouquetID], [UnitPrice], [Quantity], [Discount]) VALUES (4005, 6, 175.0000, 1, 0)
+GO
 INSERT [dbo].[OrderDetail] ([OrderID], [FlowerBouquetID], [UnitPrice], [Quantity], [Discount]) VALUES (4000, 1, 100.0000, 2, 0)
 GO
 INSERT [dbo].[OrderDetail] ([OrderID], [FlowerBouquetID], [UnitPrice], [Quantity], [Discount]) VALUES (4000, 2, 120.0000, 2, 0)
@@ -181,7 +217,32 @@ GO
 INSERT [dbo].[Supplier] ([SupplierID], [SupplierName], [SupplierAddress], [Telephone]) VALUES (3, N'Love Florist', N'3 Tran Quoc Thao Streed, Ward 6, District 3, HCMC', N'093 888 61 02  ')
 GO
 
+INSERT [dbo].[Order] ([OrderID], [CustomerID], [OrderDate], [ShippedDate], [Total], [OrderStatus]) VALUES (4006, 1, CAST(N'2023-05-05T00:00:00.000' AS DateTime), CAST(N'2023-05-06T00:00:00.000' AS DateTime), 380.0000, N'Done')
+GO
+INSERT [dbo].[Order] ([OrderID], [CustomerID], [OrderDate], [ShippedDate], [Total], [OrderStatus]) VALUES (4007, 1, CAST(N'2023-05-08T00:00:00.000' AS DateTime), CAST(N'2023-05-09T00:00:00.000' AS DateTime), 540.0000, N'Done')
+GO
 
+INSERT [dbo].[OrderDetail] ([OrderID], [FlowerBouquetID], [UnitPrice], [Quantity], [Discount]) VALUES (4006, 1, 100.0000, 2, 0)
+GO
+INSERT [dbo].[OrderDetail] ([OrderID], [FlowerBouquetID], [UnitPrice], [Quantity], [Discount]) VALUES (4006, 3, 230.0000, 1, 0)
+GO
+INSERT [dbo].[OrderDetail] ([OrderID], [FlowerBouquetID], [UnitPrice], [Quantity], [Discount]) VALUES (4007, 2, 120.0000, 2, 0)
+GO
+INSERT [dbo].[OrderDetail] ([OrderID], [FlowerBouquetID], [UnitPrice], [Quantity], [Discount]) VALUES (4007, 4, 140.0000, 1, 0)
+GO
+INSERT [dbo].[Order] ([OrderID], [CustomerID], [OrderDate], [ShippedDate], [Total], [OrderStatus]) VALUES (4008, 2, CAST(N'2023-05-10T00:00:00.000' AS DateTime), CAST(N'2023-05-11T00:00:00.000' AS DateTime), 420.0000, N'Done')
+GO
+INSERT [dbo].[Order] ([OrderID], [CustomerID], [OrderDate], [ShippedDate], [Total], [OrderStatus]) VALUES (4009, 2, CAST(N'2023-05-14T00:00:00.000' AS DateTime), CAST(N'2023-05-15T00:00:00.000' AS DateTime), 620.0000, N'Done')
+GO
+
+INSERT [dbo].[OrderDetail] ([OrderID], [FlowerBouquetID], [UnitPrice], [Quantity], [Discount]) VALUES (4008, 3, 230.0000, 1, 0)
+GO
+INSERT [dbo].[OrderDetail] ([OrderID], [FlowerBouquetID], [UnitPrice], [Quantity], [Discount]) VALUES (4008, 4, 140.0000, 2, 0)
+GO
+INSERT [dbo].[OrderDetail] ([OrderID], [FlowerBouquetID], [UnitPrice], [Quantity], [Discount]) VALUES (4009, 1, 100.0000, 3, 0)
+GO
+INSERT [dbo].[OrderDetail] ([OrderID], [FlowerBouquetID], [UnitPrice], [Quantity], [Discount]) VALUES (4009, 5, 190.0000, 1, 0)
+GO
 ALTER TABLE [dbo].[FlowerBouquet]  WITH CHECK ADD FOREIGN KEY([CategoryID])
 REFERENCES [dbo].[Category] ([CategoryID])
 ON DELETE CASCADE
@@ -206,3 +267,4 @@ USE [master]
 GO
 ALTER DATABASE [FUFlowerBouquetManagement] SET  READ_WRITE 
 GO
+
