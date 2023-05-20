@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BussinessObject.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,8 +18,11 @@ namespace TranMinhThienWPF
     /// <summary>
     /// Interaction logic for AdminView.xaml
     /// </summary>
+    /// 
     public partial class AdminView : Window
     {
+        private ShowName currentShow = ShowName.Customer;
+
         public AdminView()
         {
             InitializeComponent();
@@ -28,5 +32,64 @@ namespace TranMinhThienWPF
         {
 
         }
+        private void OnClickCustomer(object sender, RoutedEventArgs e)
+        {
+            if (currentShow != ShowName.Order)
+            {
+                ResetDisplay();
+                CustomerBtn.Style = (Style)Application.Current.Resources["MenuButtonActive"];
+                currentShow = ShowName.Customer;
+            }
+        }
+        private void OnClickOder(object sender, RoutedEventArgs e)
+        {
+            if (currentShow != ShowName.Order)
+            {
+                ResetDisplay();
+                OrderBtn.Style = (Style)Application.Current.Resources["MenuButtonActive"];
+                currentShow = ShowName.Order;
+            }
+
+        }
+        private void OnClickFlowerBouquet(object sender, RoutedEventArgs e)
+        {
+            if(currentShow != ShowName.Flower)
+            {
+                ResetDisplay();
+                FlowerBouquetBtn.Style = (Style)Application.Current.Resources["MenuButtonActive"];
+                currentShow = ShowName.Flower;
+            }
+        }
+
+        private void ResetDisplay()
+        {
+            switch (currentShow)
+            {
+                case ShowName.Customer:
+                    {
+                        CustomerBtn.Style = (Style)Application.Current.Resources["MenuBtn"];
+                   
+                        break;
+                    }
+                case ShowName.Order:
+                    {
+                        OrderBtn.Style = (Style)Application.Current.Resources["MenuBtn"];
+
+                        break;
+                    }
+                    case ShowName.Flower:
+                    {
+                        FlowerBouquetBtn.Style = (Style)Application.Current.Resources["MenuBtn"];
+                        break;
+                    }
+            }
+        }
+       
+        private enum ShowName{
+            Customer,
+            Order,
+            Flower
+        }
+      
     }
 }

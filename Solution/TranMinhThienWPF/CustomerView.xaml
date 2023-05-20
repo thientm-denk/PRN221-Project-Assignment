@@ -67,7 +67,7 @@
             <Border Grid.Column="1" Grid.ColumnSpan="2">
                 <StackPanel>
                     <TextBlock Height="40" FontSize="30" Foreground="White" TextAlignment="Left" Margin="0,20,0,0" Width="501">Order Histories</TextBlock>
-                    <ListView x:Name="OrderView" Background="#E5E8F5" Height="200" Width="500">
+                    <ListView x:Name="OrderView" Background="#E5E8F5" Height="200" Width="500" SelectionChanged="OnChangeSelectedOrder">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Oder ID" Width="50" DisplayMemberBinding="{Binding OrderId}"/>
@@ -84,11 +84,11 @@
                     <ListView x:Name="OrderDetailView" Background="#E5E8F5" Height="140" Width="500">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Order ID" Width="50" DisplayMemberBinding="{Binding ProductId}"/>
-                                <GridViewColumn Header="Flower name" Width="200" DisplayMemberBinding="{Binding ProductName}"/>
-                                <GridViewColumn Header="Unit Price" Width="100" DisplayMemberBinding="{Binding CategoryId}"/>
-                                <GridViewColumn Header="Quantity" Width="75" DisplayMemberBinding="{Binding UnitsInStock}"/>
-                                <GridViewColumn Header="Discount" Width="75" DisplayMemberBinding="{Binding UnitPrice}"/>
+                                <GridViewColumn Header="Order ID" Width="50" DisplayMemberBinding="{Binding OrderId}"/>
+                                <GridViewColumn Header="Flower name" Width="200" DisplayMemberBinding="{Binding FlowerBouquetName}"/>
+                                <GridViewColumn Header="Unit Price" Width="100" DisplayMemberBinding="{Binding UnitPrice}"/>
+                                <GridViewColumn Header="Quantity" Width="75" DisplayMemberBinding="{Binding Quantity}"/>
+                                <GridViewColumn Header="Discount" Width="75" DisplayMemberBinding="{Binding Discount}"/>
                             </GridView>
                         </ListView.View>
                     </ListView>

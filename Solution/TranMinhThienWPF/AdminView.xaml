@@ -36,13 +36,14 @@
 
                     <Separator Width="180" Margin="0,50,0,0"></Separator>
                     
-                    <Button Style="{StaticResource MenuButtonActive}">
+                    <Button x:Name="CustomerBtn" Style="{StaticResource MenuButtonActive}" Click="OnClickCustomer">
                         <TextBlock Text="Customer" Style="{StaticResource MenuButtonText}" HorizontalAlignment="Center"></TextBlock>
                     </Button>
-                    <Button Style="{StaticResource MenuBtn}">
+                    <Button x:Name="FlowerBouquetBtn" Style="{StaticResource MenuBtn}" Click="OnClickFlowerBouquet">
                         <TextBlock Text="Flower bouquet" Style="{StaticResource MenuButtonText}" HorizontalAlignment="Center"></TextBlock>
                     </Button>
-                    <Button Style="{StaticResource MenuBtn}">
+                    
+                    <Button x:Name="OrderBtn" Style="{StaticResource MenuBtn}" Click="OnClickOder">
                         <TextBlock Text="Order" Style="{StaticResource MenuButtonText}" HorizontalAlignment="Center"></TextBlock>
                     </Button>
                 </StackPanel>

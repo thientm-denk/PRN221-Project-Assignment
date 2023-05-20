@@ -43,6 +43,13 @@ namespace DataAccessObject
             var customer = context.Customers.Where(c => c.CustomerId == id).ToList()[0];
             context.Customers.Remove(customer);
         }
+        public Customer Login(string email, string password)
+        {
+            var customerLogin = context.Customers.Where(c => c.Email.ToUpper().Equals(email.ToUpper()) && c.Password.Equals(password)).ToList()[0];
+
+            return null;
+
+        }
         public void UpdateCustomer(Customer customer)
         {
             context.Customers.Update(customer);
