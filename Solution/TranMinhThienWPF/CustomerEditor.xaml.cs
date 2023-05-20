@@ -1,5 +1,6 @@
-﻿using BussinessObject.Models;
-using System.Text.RegularExpressions;
+﻿using System;
+using System.ComponentModel;
+using BussinessObject.Models;
 using System.Windows;
 using Repositories;
 using Repositories.Implementation;
@@ -13,26 +14,31 @@ namespace TranMinhThienWPF
     public partial class CustomerEditor : Window
     {
         private Customer _updateCustomer;
-
+        private Action<Customer> _onFinish;
         private bool _isUpdate;
-
         private ICustomerRepository _customerRepository = new CustomerRepository();
 
         public CustomerEditor()
         {
             InitializeComponent();
-            InitCreateView();
         }
 
-        public CustomerEditor(Customer? customer)
+        public CustomerEditor(Customer? customer, Action<Customer> OnFinish)
         {
             InitializeComponent();
-            if (customer != null)
+            _onFinish = OnFinish;
+            _updateCustomer = customer;
+
+        }
+        
+        private void Awake(object sender, RoutedEventArgs e)
+        {
+            if (_updateCustomer != null)
             {
+                
                 Title.Text = "Customer Update";
                 _isUpdate = true;
                 InitUpdateView();
-                _updateCustomer = customer;
             }
             else
             {
@@ -61,6 +67,11 @@ namespace TranMinhThienWPF
             UpdateSms1.Visibility = Visibility.Visible;
             UpdateSms2.Visibility = Visibility.Visible;
             UpdateSms3.Visibility = Visibility.Visible;
+            
+            Email.Text = _updateCustomer.Email;
+            Name.Text = _updateCustomer.CustomerName;
+            City.Text = _updateCustomer.City;
+            Country.Text = _updateCustomer.Country;
         }
 
         #region Event
@@ -83,7 +94,26 @@ namespace TranMinhThienWPF
 
         private void UpdateCustomer()
         {
+            try
+            {
+                var message = _customerRepository.UpdateCustomer(_updateCustomer,Email.Text, OldPassword.Password,Password.Password, ConfirmPassword.Password,
+                    Name.Text, City.Text, Country.Text, null);
+                if (!string.IsNullOrEmpty(message)) // ERROR
+                {
+                    MessageBox.Show(message, "ERROR");
+                    return;
+                }
             
+                MessageBox.Show("Update success fully");
+                _onFinish?.Invoke(_customerRepository.GetCustomerById(_updateCustomer.CustomerId));
+                Close();
+                
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "ERROR");
+            }
+           
         }
         private void CreateCustomer()
         {
@@ -99,5 +129,11 @@ namespace TranMinhThienWPF
             
         }
         #endregion
+
+
+        private void CustomerEditor_OnClosing(object sender, CancelEventArgs e)
+        {
+            _onFinish.Invoke(null);
+        }
     }
 }

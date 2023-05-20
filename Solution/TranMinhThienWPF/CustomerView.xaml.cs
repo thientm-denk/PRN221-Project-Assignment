@@ -16,12 +16,12 @@ namespace TranMinhThienWPF
         #region Attributes
 
         private Customer _user;
-        private List<Order> _orders = new List<Order>();
-        private List<OrderDetail> _orderDetails = new List<OrderDetail>();
+        private List<Order> _orders = new();
+        private List<OrderDetail> _orderDetails = new();
         private readonly IOrderRepository _orderRepository = new OrderRepository();
         private readonly IOrderDetailRepository _orderDetailRepository = new OrderDetailRepository();
         private readonly IFlowerBouquetRepository _flowerBouquetRepository = new FlowerBouquetRepository();
-
+        private ICustomerRepository _customerRepository = new CustomerRepository();
         private int _orderSelectIndex = -1;
         #endregion
         public CustomerView()
@@ -32,7 +32,6 @@ namespace TranMinhThienWPF
         {
             InitializeComponent();
             _user = user;
-            UserDisplayName.Text = user.CustomerName;
         }
         // Validation
         private void Awake(object sender, RoutedEventArgs e)
@@ -43,6 +42,7 @@ namespace TranMinhThienWPF
             }
             else
             {
+                UserDisplayName.Text = _customerRepository.GetCustomerById(_user.CustomerId).CustomerName;
                 LoadDataOrder();
                 UpdateOrderListView();
             }
@@ -124,8 +124,31 @@ namespace TranMinhThienWPF
 
         #region Event
 
+        private void OnFinishUpdate(Customer? newCustomer)
+        {
+            if (newCustomer == null )
+            {
+                Show();
+                return;
+            }
+            _user = newCustomer;
+            if (_user == null || _user.CustomerId == -1)
+            {
+                LogOut();
+            }
+            else
+            {
+                UserDisplayName.Text = _customerRepository.GetCustomerById(_user.CustomerId).CustomerName;
+                LoadDataOrder();
+                UpdateOrderListView();
+            }
+            
+        }
         private void OnClickUpdate(object sender, RoutedEventArgs e)
         {
+            CustomerEditor customerEditor = new CustomerEditor(_user, OnFinishUpdate);
+            customerEditor.Show();
+            Hide();
         }
         private void OnClickLogOut(object sender, RoutedEventArgs e)
         {

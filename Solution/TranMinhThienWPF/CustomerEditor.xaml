@@ -8,6 +8,8 @@
         Title="Customer Editor" Height="750" Width="400"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
+        Loaded="Awake"
+        Closing="CustomerEditor_OnClosing"
         >
     <Border BorderThickness="2">
         <Border.BorderBrush>
