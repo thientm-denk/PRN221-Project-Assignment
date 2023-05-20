@@ -18,12 +18,11 @@ namespace TranMinhThienWPF
         private Customer _user;
         private List<Order> _orders = new List<Order>();
         private List<OrderDetail> _orderDetails = new List<OrderDetail>();
-        private List<FlowerBouquet> _flowerBouque = new List<FlowerBouquet>();
-        private IOrderRepository _orderRepository = new OrderRepository();
-        private IOrderDetailRepository _orderDetailRepository = new OrderDetailRepository();
-        private IFlowerBouquetRepository _flowerBouquetRepository = new FlowerBouquetRepository();
+        private readonly IOrderRepository _orderRepository = new OrderRepository();
+        private readonly IOrderDetailRepository _orderDetailRepository = new OrderDetailRepository();
+        private readonly IFlowerBouquetRepository _flowerBouquetRepository = new FlowerBouquetRepository();
 
-        private int _orderSlectedIndex = -1;
+        private int _orderSelectIndex = -1;
         #endregion
         public CustomerView()
         {
@@ -94,6 +93,7 @@ namespace TranMinhThienWPF
 
             OrderDetailView.ItemsSource = viewModel;
         }
+        
         #region Repositories interaction
 
       
@@ -133,11 +133,11 @@ namespace TranMinhThienWPF
         }
         private void OnChangeSelectedOrder(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            if(_orderSlectedIndex != OrderView.SelectedIndex)
+            if(_orderSelectIndex != OrderView.SelectedIndex)
             {
                
-                _orderSlectedIndex = OrderView.SelectedIndex;
-                LoadDataOrderDetail(_orders[_orderSlectedIndex].OrderId);
+                _orderSelectIndex = OrderView.SelectedIndex;
+                LoadDataOrderDetail(_orders[_orderSelectIndex].OrderId);
                 UpdateOrderDetailListView();
             }
          
