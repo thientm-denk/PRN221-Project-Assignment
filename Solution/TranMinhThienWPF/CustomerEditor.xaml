@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TranMinhThienWPF"
         mc:Ignorable="d"
-        Title="Customer Editor" Height="550" Width="400"
+        Title="Customer Editor" Height="700" Width="400"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        MouseDown="Window_MouseDown">
+        >
     <Border BorderThickness="2">
         <Border.BorderBrush>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -39,10 +39,18 @@
                        Margin="0,20,0,0">
                 Password <Run Foreground="Red">*</Run>
             </TextBlock>
-            <TextBox x:Name="Password" TextAlignment="Left" FontSize="13" FontWeight="Medium" Foreground="Azure"
+            <PasswordBox x:Name="Password" FontSize="13" FontWeight="Medium" Foreground="Azure"
                         Background="Transparent" CaretBrush="Linen" BorderBrush="#CA9CCA" BorderThickness="0,0,0,1"
                         Margin="0,5,0,0">
-            </TextBox>
+            </PasswordBox>
+            <TextBlock Foreground="Azure" TextAlignment="Left" FontSize="15" FontWeight="Medium" TextWrapping="Wrap"
+                       Margin="0,20,0,0">
+                Confirm Password <Run Foreground="Red">*</Run>
+            </TextBlock>
+            <PasswordBox x:Name="ConfirmPassword" FontSize="13" FontWeight="Medium" Foreground="Azure"
+                         Background="Transparent" CaretBrush="Linen" BorderBrush="#CA9CCA" BorderThickness="0,0,0,1"
+                         Margin="0,5,0,0">
+            </PasswordBox>
             <TextBlock Foreground="Azure" TextAlignment="Left" FontSize="15" FontWeight="Medium" TextWrapping="Wrap"
                        Margin="0,20,0,0">
                 Customer Name <Run Foreground="Red">*</Run>
@@ -77,7 +85,7 @@
                         Margin="0,5,0,0">
             </TextBox>
             <Button Content="Submit" Foreground="Azure" FontWeight="Light"
-                    Margin="0,20,0,0" BorderThickness="0" Click="OnClickLogin">
+                    Margin="0,20,0,0" BorderThickness="0" Click="OnClickSubmit">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Background" Value="#C120CF"></Setter>
