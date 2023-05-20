@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TranMinhThienWPF"
         mc:Ignorable="d"
-        Title="Customer Editor" Height="700" Width="400"
+        Title="Customer Editor" Height="750" Width="400"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         >
@@ -24,7 +24,7 @@
             </LinearGradientBrush>
         </Border.Background>
 
-        <StackPanel Width="300" Orientation="Vertical" HorizontalAlignment="Center">
+        <StackPanel Width="300" VerticalAlignment="Center" Orientation="Vertical" HorizontalAlignment="Center">
             <TextBlock x:Name="Title" Foreground="Azure" TextAlignment="Center" FontSize="30" FontWeight="Heavy" TextWrapping="Wrap">Customer creator</TextBlock>
             <TextBlock Foreground="Azure" TextAlignment="Center" FontSize="15" FontWeight="Light" TextWrapping="Wrap" Margin="0,10,0,0">Please fill the information (* is required)</TextBlock>
             <TextBlock Foreground="Azure" TextAlignment="Left" FontSize="15" FontWeight="Medium" TextWrapping="Wrap"
@@ -35,9 +35,24 @@
                         Background="Transparent" CaretBrush="Linen" BorderBrush="#CA9CCA" BorderThickness="0,0,0,1"
                         Margin="0,5,0,0">
             </TextBox>
+            
+            <TextBlock Name="OldPasswordText" Foreground="Azure" TextAlignment="Left" FontSize="15" FontWeight="Medium" TextWrapping="Wrap"
+                       Margin="0,20,0,0">
+                Old Password
+                <TextBlock x:Name="CreateSms1" Foreground="Red">*</TextBlock>
+                <LineBreak></LineBreak>
+                <TextBlock x:Name="UpdateSms1" FontSize="10">(Empty if do not want to change password)</TextBlock>
+            </TextBlock>
+            <PasswordBox x:Name="OldPassword" FontSize="13" FontWeight="Medium" Foreground="Azure"
+                         Background="Transparent" CaretBrush="Linen" BorderBrush="#CA9CCA" BorderThickness="0,0,0,1"
+                         Margin="0,5,0,0">
+            </PasswordBox>
             <TextBlock Foreground="Azure" TextAlignment="Left" FontSize="15" FontWeight="Medium" TextWrapping="Wrap"
                        Margin="0,20,0,0">
-                Password <Run Foreground="Red">*</Run>
+                Password 
+                <TextBlock x:Name="CreateSms2" Foreground="Red">*</TextBlock>
+                <LineBreak></LineBreak>
+                <TextBlock x:Name="UpdateSms2" FontSize="10">(Empty if do not want to change password)</TextBlock>
             </TextBlock>
             <PasswordBox x:Name="Password" FontSize="13" FontWeight="Medium" Foreground="Azure"
                         Background="Transparent" CaretBrush="Linen" BorderBrush="#CA9CCA" BorderThickness="0,0,0,1"
@@ -45,7 +60,10 @@
             </PasswordBox>
             <TextBlock Foreground="Azure" TextAlignment="Left" FontSize="15" FontWeight="Medium" TextWrapping="Wrap"
                        Margin="0,20,0,0">
-                Confirm Password <Run Foreground="Red">*</Run>
+                Confirm Password 
+                <TextBlock x:Name="CreateSms3" Foreground="Red">*</TextBlock>
+                <LineBreak></LineBreak>
+                <TextBlock x:Name="UpdateSms3" FontSize="10">(Empty if do not want to change password)</TextBlock>
             </TextBlock>
             <PasswordBox x:Name="ConfirmPassword" FontSize="13" FontWeight="Medium" Foreground="Azure"
                          Background="Transparent" CaretBrush="Linen" BorderBrush="#CA9CCA" BorderThickness="0,0,0,1"

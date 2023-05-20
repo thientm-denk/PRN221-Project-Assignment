@@ -21,6 +21,7 @@ namespace TranMinhThienWPF
         public CustomerEditor()
         {
             InitializeComponent();
+            InitCreateView();
         }
 
         public CustomerEditor(Customer? customer)
@@ -30,15 +31,37 @@ namespace TranMinhThienWPF
             {
                 Title.Text = "Customer Update";
                 _isUpdate = true;
+                InitUpdateView();
                 _updateCustomer = customer;
             }
             else
             {
+                InitCreateView();
                 Title.Text = "Customer Creator";
             }
         }
-
-        
+        private void InitCreateView()
+        {
+            OldPassword.Visibility = Visibility.Collapsed;
+            OldPasswordText.Visibility = Visibility.Collapsed;
+            CreateSms1.Visibility = Visibility.Visible;
+            CreateSms2.Visibility = Visibility.Visible;
+            CreateSms3.Visibility = Visibility.Visible;
+            UpdateSms1.Visibility = Visibility.Collapsed;
+            UpdateSms2.Visibility = Visibility.Collapsed;
+            UpdateSms3.Visibility = Visibility.Collapsed;
+        }
+        private void InitUpdateView()
+        {
+            OldPassword.Visibility = Visibility.Visible;
+            OldPasswordText.Visibility = Visibility.Visible;
+            CreateSms1.Visibility = Visibility.Collapsed;
+            CreateSms2.Visibility = Visibility.Collapsed;
+            CreateSms3.Visibility = Visibility.Collapsed;
+            UpdateSms1.Visibility = Visibility.Visible;
+            UpdateSms2.Visibility = Visibility.Visible;
+            UpdateSms3.Visibility = Visibility.Visible;
+        }
 
         #region Event
 
