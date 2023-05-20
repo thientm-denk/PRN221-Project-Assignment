@@ -35,7 +35,18 @@ namespace TranMinhThienWPF
             LoadDataOrder();
             UpdateOrderListView();
         }
-
+        // Order
+        private void LoadDataOrder()
+        {
+            try
+            {
+                _orders = _orderRepository.GetOrdersByCustomer(_user.CustomerId);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "ERROR");
+            }
+        }
         private void UpdateOrderListView()
         {
             if (_orders != null)
@@ -47,6 +58,18 @@ namespace TranMinhThienWPF
                 MessageBox.Show("You do not have any order", "Message");
             }
 
+        }
+        // Order Details
+        private void LoadDataOrderDetail(int id)
+        {
+            try
+            {
+                _orderDetails = _orderDetailRepository.GetOrderDetailById(id);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "ERROR");
+            }
         }
         private void UpdateOrderDetailListView()
         {
@@ -60,28 +83,7 @@ namespace TranMinhThienWPF
         }
         #region Repositories interaction
 
-        private void LoadDataOrder()
-        {
-            try
-            {
-                _orders = _orderRepository.GetOrdersByCustomer(_user.CustomerId);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "ERROR");
-            }
-        }
-        private void LoadDataOrderDetail()
-        {
-            try
-            {
-                _orderDetails = _orderDetailRepository.GetOrderDetailById(_user.CustomerId);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "ERROR");
-            }
-        }
+      
         private string GetFlowerName(int id)
         {
             try
@@ -108,8 +110,10 @@ namespace TranMinhThienWPF
         {
             if(_orderSlectedIndex != OrderView.SelectedIndex)
             {
+               
                 _orderSlectedIndex = OrderView.SelectedIndex;
-                LoadDataOrderDetail();
+                LoadDataOrderDetail(_orders[_orderSlectedIndex].OrderId);
+                UpdateOrderDetailListView();
             }
          
         }
