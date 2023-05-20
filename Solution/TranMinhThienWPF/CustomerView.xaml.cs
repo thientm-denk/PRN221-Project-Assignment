@@ -99,12 +99,24 @@ namespace TranMinhThienWPF
             
         }
 
+        private void LogOut()
+        {
+            Login login = new Login();
+            login.Show();
+            _user = null;
+            this.Close();
+        }
+
         #endregion
 
         #region Event
 
         private void OnClickUpdate(object sender, RoutedEventArgs e)
         {
+        }
+        private void OnClickLogOut(object sender, RoutedEventArgs e)
+        {
+            LogOut();
         }
         private void OnChangeSelectedOrder(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
