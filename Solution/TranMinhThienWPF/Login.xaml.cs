@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Input;
+using Repositories;
 using Repositories.Implementation;
 
 namespace TranMinhThienWPF
 {
     public partial class Login : Window
     {
-        private CustomerRepository _customerRepository = new CustomerRepository();
+        private ICustomerRepository _customerRepository = new CustomerRepository();
         
         public Login()
         {
@@ -18,7 +19,7 @@ namespace TranMinhThienWPF
         {
             try
             {
-                var user = _customerRepository.Login(Email.Text, Password.Password.ToString());
+                var user = _customerRepository.Login(Email.Text, Password.Password);
                 if (user != null)
                 {
                     if (user.CustomerId == -1)
@@ -30,7 +31,7 @@ namespace TranMinhThienWPF
                     {
                         CustomerView customerView = new CustomerView(user);
                         customerView.Show();
-                        this.Close();
+                        Close();
                     }
                 }
                 else
@@ -44,7 +45,7 @@ namespace TranMinhThienWPF
             }
         }
 
-        private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             // click to drag form to anywhere
             if (e.LeftButton == MouseButtonState.Pressed)
