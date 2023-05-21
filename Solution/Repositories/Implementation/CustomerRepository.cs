@@ -23,6 +23,11 @@ namespace Repositories.Implementation
             CustomerDAO.Instance.DeleteCustomer(idCustomer);
         }
 
+        public List<Customer> GetAllCustomer()
+        {
+            return CustomerDAO.Instance.GetAllCustomer();
+        }
+
         public Customer GetCustomerById(int id)
         {
             return CustomerDAO.Instance.GetCustomerById(id);
@@ -66,10 +71,10 @@ namespace Repositories.Implementation
             return null;
         }
 
-        public string UpdateCustomer(Customer oldCustomer, string email,string oldPassword, string password, string confirmPass, string name, string city,
+        public string UpdateCustomer(Customer oldCustomer, string email, string oldPassword, string password,
+            string confirmPass, string name, string city,
             string country, DateTime? birthday)
         {
-            var newCustomer = oldCustomer;
             // Fill all the * information
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(name) ||
                 string.IsNullOrEmpty(city) || string.IsNullOrEmpty(country))
@@ -91,7 +96,7 @@ namespace Repositories.Implementation
                 {
                     return "Email too long, below 30 character";
                 }
-           
+
                 // check space
                 if (email.Contains(" "))
                 {
@@ -106,16 +111,18 @@ namespace Repositories.Implementation
                     return "Email tail not valid or email contain special character";
                 }
             }
-            
+
             // Check other filed 
             if (name.Length > 30)
             {
                 return "Name too long, below 30 character";
             }
+
             if (city.Length > 30)
             {
                 return "City too long, below 30 character";
             }
+
             if (country.Length > 30)
             {
                 return "Country too long, below 30 character";
@@ -126,7 +133,7 @@ namespace Repositories.Implementation
                 !string.IsNullOrEmpty(confirmPass))
             {
                 isEditPass = true;
-                
+
                 if (!oldCustomer.Password.Equals(oldPassword)) return "Old password is not correct";
 
                 // Passwords don't match
@@ -138,7 +145,7 @@ namespace Repositories.Implementation
                     // Password is too short
                     return "Password is too short, at least 8 character";
                 }
-                
+
                 if (!Regex.IsMatch(password, @"\d"))
                 {
                     // Password doesn't contain a digit
@@ -154,21 +161,20 @@ namespace Repositories.Implementation
 
             oldCustomer.Email = email;
             oldCustomer.CustomerName = name;
-            oldCustomer.Password = isEditPass? password : oldCustomer.Password;
+            oldCustomer.Password = isEditPass ? password : oldCustomer.Password;
             oldCustomer.City = city;
             oldCustomer.Country = country;
             oldCustomer.Birthday = birthday;
-            
+
             CustomerDAO.Instance.UpdateCustomer(oldCustomer);
             // Additional criteria can be added as needed
             return "";
         }
-        
+
         public string CreateCustomer(string email, string password, string confirmPass, string name, string city,
             string country,
             DateTime? birthday)
         {
-            
             // Fill all the * information
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password) ||
                 string.IsNullOrEmpty(confirmPass) || string.IsNullOrEmpty(name) ||
@@ -176,7 +182,7 @@ namespace Repositories.Implementation
             {
                 return "Please fill all required information!";
             }
-            
+
             // Email check
             // check for @
             if (!email.Contains("@"))
@@ -189,7 +195,7 @@ namespace Repositories.Implementation
             {
                 return "Email too long, below 30 character";
             }
-           
+
             // check space
             if (email.Contains(" "))
             {
@@ -203,24 +209,26 @@ namespace Repositories.Implementation
             {
                 return "Email tail not valid or email contain special character";
             }
-            
+
             // Check other filed 
             if (name.Length > 30)
             {
                 return "Name too long, below 30 character";
             }
+
             if (city.Length > 30)
             {
                 return "City too long, below 30 character";
             }
+
             if (country.Length > 30)
             {
                 return "Country too long, below 30 character";
             }
-            
+
             // Passwords don't match
-            if (!password.Equals(confirmPass)) return "Password does not match"; 
-            
+            if (!password.Equals(confirmPass)) return "Password does not match";
+
             // Check password criteria
             if (password.Length < 8)
             {
@@ -251,7 +259,7 @@ namespace Repositories.Implementation
                 Email = email,
                 Password = password
             });
-            
+
             return "";
         }
     }

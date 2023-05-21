@@ -9,6 +9,7 @@ namespace Repositories
         public void AddNewCustomer(Customer newCustomer);
         public void UpdateCustomer(Customer newCustomer);
         public void DeleteCustomer(int idCustomer);
+        public List<Customer> GetAllCustomer();
         public Customer GetCustomerById(int id);
         public List<Customer> GetCustomerByInformation(int? id, string? email, string? cusName, string? city,
             string? county, DateTime? birthday);

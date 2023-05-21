@@ -1,17 +1,10 @@
 ﻿using BussinessObject.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using Repositories;
+using Repositories.Implementation;
 
 namespace TranMinhThienWPF
 {
@@ -21,75 +14,150 @@ namespace TranMinhThienWPF
     /// 
     public partial class AdminView : Window
     {
-        private ShowName currentShow = ShowName.Customer;
+        private ShowName _currentShow = ShowName.Customer;
+        private ICustomerRepository _customerRepository = new CustomerRepository();
+        private List<Customer> _listCustomer = new();
 
+        private int _indexSelect = -1;
         public AdminView()
         {
             InitializeComponent();
         }
 
-        private void OnClickUpdate(object sender, RoutedEventArgs e)
-        {
+        #region View Manager
 
-        }
         private void OnClickCustomer(object sender, RoutedEventArgs e)
         {
-            if (currentShow != ShowName.Order)
+            if (_currentShow != ShowName.Customer)
             {
                 ResetDisplay();
                 CustomerBtn.Style = (Style)Application.Current.Resources["MenuButtonActive"];
-                currentShow = ShowName.Customer;
+                _currentShow = ShowName.Customer;
+                CustomerManagement.Visibility = Visibility.Visible;
+                ShowAllCustomer();
             }
         }
+
         private void OnClickOder(object sender, RoutedEventArgs e)
         {
-            if (currentShow != ShowName.Order)
+            if (_currentShow != ShowName.Order)
             {
                 ResetDisplay();
                 OrderBtn.Style = (Style)Application.Current.Resources["MenuButtonActive"];
-                currentShow = ShowName.Order;
+                _currentShow = ShowName.Order;
             }
-
         }
+
         private void OnClickFlowerBouquet(object sender, RoutedEventArgs e)
         {
-            if(currentShow != ShowName.Flower)
+            if (_currentShow != ShowName.Flower)
             {
                 ResetDisplay();
                 FlowerBouquetBtn.Style = (Style)Application.Current.Resources["MenuButtonActive"];
-                currentShow = ShowName.Flower;
+                _currentShow = ShowName.Flower;
             }
         }
 
         private void ResetDisplay()
         {
-            switch (currentShow)
+            switch (_currentShow)
             {
                 case ShowName.Customer:
-                    {
-                        CustomerBtn.Style = (Style)Application.Current.Resources["MenuBtn"];
-                   
-                        break;
-                    }
+                {
+                    CustomerBtn.Style = (Style)Application.Current.Resources["MenuBtn"];
+                    CustomerManagement.Visibility = Visibility.Collapsed;
+                    break;
+                }
                 case ShowName.Order:
-                    {
-                        OrderBtn.Style = (Style)Application.Current.Resources["MenuBtn"];
+                {
+                    OrderBtn.Style = (Style)Application.Current.Resources["MenuBtn"];
 
-                        break;
-                    }
-                    case ShowName.Flower:
-                    {
-                        FlowerBouquetBtn.Style = (Style)Application.Current.Resources["MenuBtn"];
-                        break;
-                    }
+                    break;
+                }
+                case ShowName.Flower:
+                {
+                    FlowerBouquetBtn.Style = (Style)Application.Current.Resources["MenuBtn"];
+                    break;
+                }
             }
         }
-       
-        private enum ShowName{
+
+        private enum ShowName
+        {
             Customer,
             Order,
             Flower
         }
-      
+
+        #endregion
+
+        #region Customer Manager
+
+        private void ShowAllCustomer()
+        {
+            try
+            {
+                _listCustomer = _customerRepository.GetAllCustomer();
+                CustomerView.ItemsSource = _listCustomer;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "ERROR");
+            }
+           
+        }
+
+        #endregion
+
+        #region Event
+
+        // CUSTOMER
+        private void OnChangeSelectedCustomer(object sender, SelectionChangedEventArgs e)
+        {
+            _indexSelect = CustomerView.SelectedIndex;
+        }
+
+        private void OnClickShowAllCustomer(object sender, RoutedEventArgs e)
+        {
+            ShowAllCustomer();
+        }
+
+        private void OnClickDeleteCustomer(object sender, RoutedEventArgs e)
+        {
+            if (_indexSelect != -1)
+            {
+                
+            }
+            else
+            {
+                MessageBox.Show("Please select an customer", "Warning");
+            }
+        }
+
+        private void OnClickUpdateCustomer(object sender, RoutedEventArgs e)
+        {
+            if (_indexSelect != -1)
+            {
+                
+            }
+            else
+            {
+                MessageBox.Show("Please select an customer", "Warning");
+            }
+        }
+
+        private void OnClickAddNewCustomer(object sender, RoutedEventArgs e)
+        {
+            if (_indexSelect != -1)
+            {
+                
+            }
+            else
+            {
+                MessageBox.Show("Please select an customer", "Warning");
+            }
+        }
+
+        #endregion
     }
 }
