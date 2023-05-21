@@ -8,5 +8,15 @@ namespace TranMinhThienWPF
         {
             InitializeComponent();
         }
+
+        private void OnClickSubmit(object sender, RoutedEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void Awake(object sender, RoutedEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
