@@ -6,10 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Implementation\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\BussinessObject\BussinessObject.csproj" />
     <ProjectReference Include="..\DataAccessObject\DataAccessObject.csproj" />
   </ItemGroup>

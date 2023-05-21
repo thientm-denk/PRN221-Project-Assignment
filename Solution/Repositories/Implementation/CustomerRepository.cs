@@ -10,34 +10,34 @@ namespace Repositories.Implementation
     {
         public void AddNewCustomer(Customer newCustomer)
         {
-            CustomerDAO.Instance.AddCustomer(newCustomer);
+            CustomerDao.Instance.AddCustomer(newCustomer);
         }
 
         public void UpdateCustomer(Customer newCustomer)
         {
-            CustomerDAO.Instance.UpdateCustomer(newCustomer);
+            CustomerDao.Instance.UpdateCustomer(newCustomer);
         }
 
         public void DeleteCustomer(int idCustomer)
         {
-            CustomerDAO.Instance.DeleteCustomer(idCustomer);
+            CustomerDao.Instance.DeleteCustomer(idCustomer);
         }
 
         public List<Customer> GetAllCustomer()
         {
-            return CustomerDAO.Instance.GetAllCustomer();
+            return CustomerDao.Instance.GetAllCustomer();
         }
 
         public Customer GetCustomerById(int id)
         {
-            return CustomerDAO.Instance.GetCustomerById(id);
+            return CustomerDao.Instance.GetCustomerById(id);
         }
 
         public List<Customer> GetCustomerByInformation(int? id, string email, string cusName, string city,
             string county,
             DateTime? birthday)
         {
-            return CustomerDAO.Instance.GetCustomerByInformation(id, email, cusName, city, county, birthday);
+            return CustomerDao.Instance.GetCustomerByInformation(id, email, cusName, city, county, birthday);
         }
 
         public Customer Login(string email, string password)
@@ -52,7 +52,7 @@ namespace Repositories.Implementation
             }
 
             // Customer login
-            var customerList = CustomerDAO.Instance.GetAllCustomer();
+            var customerList = CustomerDao.Instance.GetAllCustomer();
             foreach (var cus in customerList)
             {
                 // Check for email if not -> next customer
@@ -166,7 +166,7 @@ namespace Repositories.Implementation
             oldCustomer.Country = country;
             oldCustomer.Birthday = birthday;
 
-            CustomerDAO.Instance.UpdateCustomer(oldCustomer);
+            CustomerDao.Instance.UpdateCustomer(oldCustomer);
             // Additional criteria can be added as needed
             return "";
         }
@@ -250,7 +250,7 @@ namespace Repositories.Implementation
 
             // Additional criteria can be added as needed
 
-            CustomerDAO.Instance.AddCustomer(new Customer()
+            CustomerDao.Instance.AddCustomer(new Customer()
             {
                 Birthday = birthday,
                 City = city,

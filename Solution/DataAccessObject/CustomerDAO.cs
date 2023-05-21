@@ -5,12 +5,12 @@ using System.Linq;
 
 namespace DataAccessObject
 {
-    public class CustomerDAO
+    public class CustomerDao
     {
-        private static CustomerDAO instance = null;
+        private static CustomerDao instance = null;
         private static object instanceLook = new object();
 
-        public static CustomerDAO Instance
+        public static CustomerDao Instance
         {
             get
             {
@@ -18,7 +18,7 @@ namespace DataAccessObject
                 {
                     if (instance == null)
                     {
-                        instance = new CustomerDAO();
+                        instance = new CustomerDao();
                     }
                     return instance;
                 }
