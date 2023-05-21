@@ -148,16 +148,17 @@ namespace TranMinhThienWPF
 
         private void OnClickAddNewCustomer(object sender, RoutedEventArgs e)
         {
-            if (_indexSelect != -1)
-            {
-                
-            }
-            else
-            {
-                MessageBox.Show("Please select an customer", "Warning");
-            }
-        }
+           
+                CustomerEditor customerEditor = new CustomerEditor(null, OnFinishCreateCustomer);
+                customerEditor.Show();
+                Hide();
 
+        }
+        private void OnFinishCreateCustomer(Customer? newCustomer)
+        {
+            Show();
+            ShowAllCustomer();
+        }
         #endregion
     }
 }

@@ -131,8 +131,9 @@ namespace TranMinhThienWPF
                 Show();
                 return;
             }
+            
             _user = newCustomer;
-            if (_user == null || _user.CustomerId == -1)
+            if (_user.CustomerId == -1)
             {
                 LogOut();
             }
@@ -142,7 +143,6 @@ namespace TranMinhThienWPF
                 LoadDataOrder();
                 UpdateOrderListView();
             }
-            
         }
         private void OnClickUpdate(object sender, RoutedEventArgs e)
         {

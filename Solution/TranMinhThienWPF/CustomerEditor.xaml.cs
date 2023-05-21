@@ -117,15 +117,24 @@ namespace TranMinhThienWPF
         }
         private void CreateCustomer()
         {
-            var message = _customerRepository.CreateCustomer(Email.Text, Password.Password, ConfirmPassword.Password,
-                Name.Text, City.Text, Country.Text, null);
-            if (!string.IsNullOrEmpty(message)) // ERROR
+            try
             {
-                MessageBox.Show(message, "ERROR");
-                return;
-            }
+                var message = _customerRepository.CreateCustomer(Email.Text, Password.Password, ConfirmPassword.Password,
+                    Name.Text, City.Text, Country.Text, null);
+                if (!string.IsNullOrEmpty(message)) // ERROR
+                {
+                    MessageBox.Show(message, "ERROR");
+                    return;
+                }
             
-            // SUCCESS, Do something
+                MessageBox.Show("Update success fully");
+                _onFinish?.Invoke(_customerRepository.GetCustomerById(_updateCustomer.CustomerId));
+                Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "ERROR");
+            }
             
         }
         #endregion
