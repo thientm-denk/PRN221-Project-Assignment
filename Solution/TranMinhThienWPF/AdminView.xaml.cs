@@ -126,6 +126,23 @@ namespace TranMinhThienWPF
         {
             if (_indexSelect != -1)
             {
+                MessageBoxResult result =
+                    MessageBox.Show("Are you sure to delete " + _listCustomer[_indexSelect].CustomerName,
+                        "Confirm delete", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        _customerRepository.DeleteCustomer(_listCustomer[_indexSelect].CustomerId);
+                        MessageBox.Show("Delete successfully ", "Notification");
+                        ShowAllCustomer();
+                    }
+                    catch (Exception exception)
+                    {
+                        MessageBox.Show("Delete fail: " + exception.Message, "ERROR");
+                    }
+                }
             }
             else
             {

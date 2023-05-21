@@ -45,6 +45,7 @@ namespace DataAccessObject
         {
             var customer = context.Customers.Where(c => c.CustomerId == id).ToList()[0];
             context.Customers.Remove(customer);
+            context.SaveChanges();
         }
         
         public Customer GetCustomerById(int id)
