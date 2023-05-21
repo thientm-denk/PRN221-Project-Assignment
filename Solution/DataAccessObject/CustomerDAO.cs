@@ -53,6 +53,11 @@ namespace DataAccessObject
             var customer = context.Customers.Where(c => c.CustomerId == id).ToList()[0];
             return customer;
         }
+        public void UpdateCustomer(Customer customer)
+        {
+            context.Customers.Update(customer);
+            context.SaveChanges();
+        }
         public Customer Login(string email, string password)
         {
             var customerLogin = context.Customers.Where(c => c.Email.ToUpper().Equals(email.ToUpper()) && c.Password.Equals(password)).ToList()[0];
@@ -60,11 +65,7 @@ namespace DataAccessObject
             return null;
 
         }
-        public void UpdateCustomer(Customer customer)
-        {
-            context.Customers.Update(customer);
-            context.SaveChanges();
-        }
+        
         public List<Customer> GetCustomerByInformation(int ?id, string ?email, string? cusName, string? city, string? county, DateTime? birthday)
         {
             var customerList = context.Customers.ToList();
