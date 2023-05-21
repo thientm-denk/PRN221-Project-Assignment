@@ -15,5 +15,22 @@ namespace Repositories.Implementation
         {
             return FlowerBouquetDAO.Instance.GetFlowerName(id);
         }
+
+        public void DeleteFlower(int idCustomer)
+        {
+            
+        }
+
+        public string UpdateFlower(FlowerBouquet oldFlower, string categoryId, string flowerName, string description, string unitPrice,
+            string unitsInStock, string? flowerBouquetStatus, string? supplierId)
+        {
+            return "";
+        }
+
+        public string CreateFlower(string categoryId, string flowerName, string description, string unitPrice, string unitsInStock,
+            string? flowerBouquetStatus, string? supplierId)
+        {
+            return "";
+        }
     }
 }
