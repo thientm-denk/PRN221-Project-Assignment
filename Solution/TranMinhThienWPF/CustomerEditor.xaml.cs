@@ -128,7 +128,7 @@ namespace TranMinhThienWPF
                 }
             
                 MessageBox.Show("Update success fully");
-                _onFinish?.Invoke(_customerRepository.GetCustomerById(_updateCustomer.CustomerId));
+                _onFinish?.Invoke(null);
                 Close();
             }
             catch (Exception e)

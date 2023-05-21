@@ -34,7 +34,10 @@ namespace DataAccessObject
 
         public void AddCustomer(Customer customer)
         {
-            context.Customers.Update(customer);
+            var maxId = context.Customers.Max(c => c.CustomerId);
+            customer.CustomerId = maxId + 1;
+
+            context.Customers.Add(customer);
             context.SaveChanges();
         }
 
