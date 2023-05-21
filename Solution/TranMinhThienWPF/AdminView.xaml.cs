@@ -19,6 +19,7 @@ namespace TranMinhThienWPF
         private List<Customer> _listCustomer = new();
 
         private int _indexSelect = -1;
+
         public AdminView()
         {
             InitializeComponent();
@@ -104,7 +105,6 @@ namespace TranMinhThienWPF
             {
                 MessageBox.Show(e.Message, "ERROR");
             }
-           
         }
 
         #endregion
@@ -126,7 +126,6 @@ namespace TranMinhThienWPF
         {
             if (_indexSelect != -1)
             {
-                
             }
             else
             {
@@ -138,7 +137,9 @@ namespace TranMinhThienWPF
         {
             if (_indexSelect != -1)
             {
-                
+                CustomerEditor customerEditor = new CustomerEditor(_listCustomer[_indexSelect], OnFinishUpdateCustomer);
+                customerEditor.Show();
+                Hide();
             }
             else
             {
@@ -148,17 +149,27 @@ namespace TranMinhThienWPF
 
         private void OnClickAddNewCustomer(object sender, RoutedEventArgs e)
         {
-           
-                CustomerEditor customerEditor = new CustomerEditor(null, OnFinishCreateCustomer);
-                customerEditor.Show();
-                Hide();
-
+            CustomerEditor customerEditor = new CustomerEditor(null, OnFinishCreateCustomer);
+            customerEditor.Show();
+            Hide();
         }
+
         private void OnFinishCreateCustomer(Customer? newCustomer)
         {
             Show();
             ShowAllCustomer();
+            _indexSelect = -1;
+            CustomerView.SelectedIndex = -1;
         }
+
+        private void OnFinishUpdateCustomer(Customer? newCustomer)
+        {
+            Show();
+            ShowAllCustomer();
+            _indexSelect = -1;
+            CustomerView.SelectedIndex = -1;
+        }
+
         #endregion
     }
 }

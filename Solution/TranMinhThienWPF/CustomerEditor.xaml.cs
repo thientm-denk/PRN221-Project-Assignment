@@ -23,10 +23,10 @@ namespace TranMinhThienWPF
             InitializeComponent();
         }
 
-        public CustomerEditor(Customer? customer, Action<Customer> OnFinish)
+        public CustomerEditor(Customer? customer, Action<Customer> onFinish)
         {
             InitializeComponent();
-            _onFinish = OnFinish;
+            _onFinish = onFinish;
             _updateCustomer = customer;
 
         }
