@@ -58,8 +58,8 @@
                 </StackPanel>
             </Border>
 
-            <Border Grid.Column="1" Grid.ColumnSpan="2">
-                <StackPanel Name="CustomerManagement">
+            <Border Grid.Column="1" Grid.ColumnSpan="2" Name="CustomerManagement" Visibility="Collapsed">
+                <StackPanel>
                     <TextBlock HorizontalAlignment="Center" Margin="0,30,0,0">
                         <TextBox x:Name="SearchValue" TextAlignment="Left" FontSize="15" FontWeight="Medium"
                                  Foreground="Azure"
@@ -68,7 +68,7 @@
                                  Margin="10,0,0,0" Width="400">
                         </TextBox>
                         <ComboBox Width="100" Text="Search Type">
-                            
+
                         </ComboBox>
                         <Button Content="Search" Foreground="Azure" FontWeight="Light"
                                 Margin="0,10,0,0" BorderThickness="0">
@@ -181,7 +181,7 @@
                             </Button.Template>
                         </Button>
                         <Button Content="Add new customer" Foreground="Azure" FontWeight="Light"
-                                Margin="0,0,0,0" BorderThickness="0"  Click="OnClickAddNewCustomer">
+                                Margin="0,0,0,0" BorderThickness="0" Click="OnClickAddNewCustomer">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="#C120CF"></Setter>
@@ -208,18 +208,190 @@
                             </Button.Template>
                         </Button>
                     </TextBlock>
-                    
-                    <ListView x:Name="CustomerView" Margin="0,30,0,0" Background="#E5E8F5" Height="300" Width="550" SelectionChanged="OnChangeSelectedCustomer">
+
+                    <ListView x:Name="CustomerView" Margin="0,30,0,0" Background="#E5E8F5" Height="300" Width="550"
+                              SelectionChanged="OnChangeSelectedCustomer">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding CustomerId}"/>
-                                <GridViewColumn Header="Email" Width="120" DisplayMemberBinding="{Binding Email}"/>
-                                <GridViewColumn Header="Name" Width="110" DisplayMemberBinding="{Binding CustomerName}"/>
-                                <GridViewColumn Header="City" Width="80" DisplayMemberBinding="{Binding City}"/>
-                                <GridViewColumn Header="Country" Width="80" DisplayMemberBinding="{Binding Country}"/>
+                                <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding CustomerId}" />
+                                <GridViewColumn Header="Email" Width="120" DisplayMemberBinding="{Binding Email}" />
+                                <GridViewColumn Header="Name" Width="110" DisplayMemberBinding="{Binding CustomerName}" />
+                                <GridViewColumn Header="City" Width="80" DisplayMemberBinding="{Binding City}" />
+                                <GridViewColumn Header="Country" Width="80" DisplayMemberBinding="{Binding Country}" />
                                 <GridViewColumn Header="Birthday" Width="80">
                                     <GridViewColumn.DisplayMemberBinding>
-                                        <Binding Path="Birthday" StringFormat="dd/MM/yyyy"/>
+                                        <Binding Path="Birthday" StringFormat="dd/MM/yyyy" />
+                                    </GridViewColumn.DisplayMemberBinding>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="1" Grid.ColumnSpan="2" Name="FlowerManagement" Visibility="Visible">
+                <StackPanel>
+                    <TextBlock HorizontalAlignment="Center" Margin="0,30,0,0">
+                        <TextBox x:Name="SearchValueFlower" TextAlignment="Left" FontSize="15" FontWeight="Medium"
+                                 Foreground="Azure"
+                                 Background="Transparent" CaretBrush="Linen" BorderBrush="#CA9CCA"
+                                 BorderThickness="0,0,0,1"
+                                 Margin="10,0,0,0" Width="400">
+                        </TextBox>
+                        <ComboBox Width="100" Text="Search Type">
+
+                        </ComboBox>
+                        <Button Content="Search" Foreground="Azure" FontWeight="Light"
+                                Margin="0,10,0,0" BorderThickness="0">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="#C120CF"></Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="true">
+                                            <Setter Property="Background" Value="#C597C5"></Setter>
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="true">
+                                            <Setter Property="Background" Value="#FFE7FF"></Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+
+                            </Button.Style>
+
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Width="50" Height="20" Background="{TemplateBinding Background}"
+                                            CornerRadius="10">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </TextBlock>
+                    <TextBlock HorizontalAlignment="Center" Margin="0,30,0,0">
+                        <Button Content="Show all flower" Foreground="Azure" FontWeight="Light"
+                                Margin="0,0,0,0" BorderThickness="0" Click="OnClickShowAllCustomer">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="#C120CF"></Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="true">
+                                            <Setter Property="Background" Value="#C597C5"></Setter>
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="true">
+                                            <Setter Property="Background" Value="#FFE7FF"></Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+
+                            </Button.Style>
+
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Width="100" Height="30" Background="{TemplateBinding Background}"
+                                            CornerRadius="3">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                        <Button Content="Delete flower" Foreground="Azure" FontWeight="Light"
+                                Margin="0,0,0,0" BorderThickness="0" Click="OnClickDeleteCustomer">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="#C120CF"></Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="true">
+                                            <Setter Property="Background" Value="#C597C5"></Setter>
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="true">
+                                            <Setter Property="Background" Value="#FFE7FF"></Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+
+                            </Button.Style>
+
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Width="100" Height="30" Background="{TemplateBinding Background}"
+                                            CornerRadius="3">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                        <Button Content="Update flower" Foreground="Azure" FontWeight="Light"
+                                Margin="0,0,0,0" BorderThickness="0" Click="OnClickUpdateCustomer">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="#C120CF"></Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="true">
+                                            <Setter Property="Background" Value="#C597C5"></Setter>
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="true">
+                                            <Setter Property="Background" Value="#FFE7FF"></Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+
+                            </Button.Style>
+
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Width="100" Height="30" Background="{TemplateBinding Background}"
+                                            CornerRadius="3">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                        <Button Content="Add new flower" Foreground="Azure" FontWeight="Light"
+                                Margin="0,0,0,0" BorderThickness="0" Click="OnClickAddNewCustomer">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="#C120CF"></Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="true">
+                                            <Setter Property="Background" Value="#C597C5"></Setter>
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="true">
+                                            <Setter Property="Background" Value="#FFE7FF"></Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+
+                            </Button.Style>
+
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Width="100" Height="30" Background="{TemplateBinding Background}"
+                                            CornerRadius="3">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </TextBlock>
+
+                    <ListView x:Name="FlowerView" Margin="0,30,0,0" Background="#E5E8F5" Height="300" Width="550"
+                              SelectionChanged="OnChangeSelectedCustomer">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding CustomerId}" />
+                                <GridViewColumn Header="Email" Width="120" DisplayMemberBinding="{Binding Email}" />
+                                <GridViewColumn Header="Name" Width="110" DisplayMemberBinding="{Binding CustomerName}" />
+                                <GridViewColumn Header="City" Width="80" DisplayMemberBinding="{Binding City}" />
+                                <GridViewColumn Header="Country" Width="80" DisplayMemberBinding="{Binding Country}" />
+                                <GridViewColumn Header="Birthday" Width="80">
+                                    <GridViewColumn.DisplayMemberBinding>
+                                        <Binding Path="Birthday" StringFormat="dd/MM/yyyy" />
                                     </GridViewColumn.DisplayMemberBinding>
                                 </GridViewColumn>
                             </GridView>

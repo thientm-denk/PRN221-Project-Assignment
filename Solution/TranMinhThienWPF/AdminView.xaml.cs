@@ -17,12 +17,16 @@ namespace TranMinhThienWPF
         private ShowName _currentShow = ShowName.Customer;
         private ICustomerRepository _customerRepository = new CustomerRepository();
         private List<Customer> _listCustomer = new();
-
         private int _indexSelect = -1;
 
         public AdminView()
         {
             InitializeComponent();
+            ResetDisplay();
+            CustomerBtn.Style = (Style)Application.Current.Resources["MenuButtonActive"];
+            _currentShow = ShowName.Customer;
+            CustomerManagement.Visibility = Visibility.Visible;
+            ShowAllCustomer();
         }
 
         #region View Manager
@@ -55,24 +59,25 @@ namespace TranMinhThienWPF
             {
                 ResetDisplay();
                 FlowerBouquetBtn.Style = (Style)Application.Current.Resources["MenuButtonActive"];
+                FlowerManagement.Visibility = Visibility.Visible;
                 _currentShow = ShowName.Flower;
             }
         }
 
         private void ResetDisplay()
         {
+            CustomerManagement.Visibility = Visibility.Collapsed;
+            FlowerManagement.Visibility = Visibility.Collapsed;
             switch (_currentShow)
             {
                 case ShowName.Customer:
                 {
                     CustomerBtn.Style = (Style)Application.Current.Resources["MenuBtn"];
-                    CustomerManagement.Visibility = Visibility.Collapsed;
                     break;
                 }
                 case ShowName.Order:
                 {
                     OrderBtn.Style = (Style)Application.Current.Resources["MenuBtn"];
-
                     break;
                 }
                 case ShowName.Flower:
@@ -107,11 +112,22 @@ namespace TranMinhThienWPF
             }
         }
 
+        private void ShowAllFlower()
+        {
+            try
+            {
+                // _listCustomer = _customerRepository.GetAllCustomer();
+                // CustomerView.ItemsSource = _listCustomer;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "ERROR");
+            }
+        }
         #endregion
 
-        #region Event
+        #region CUSTOMER Event
 
-        // CUSTOMER
         private void OnChangeSelectedCustomer(object sender, SelectionChangedEventArgs e)
         {
             _indexSelect = CustomerView.SelectedIndex;
@@ -186,6 +202,81 @@ namespace TranMinhThienWPF
             _indexSelect = -1;
             CustomerView.SelectedIndex = -1;
         }
+
+        #endregion
+
+        #region Flower Event
+
+        private void OnClickShowAllFlower(object sender, RoutedEventArgs e)
+        {
+            ShowAllFlower();
+        }
+
+        private void OnClickDeleteFlower(object sender, RoutedEventArgs e)
+        {
+            if (_indexSelect != -1)
+            {
+                MessageBoxResult result =
+                    MessageBox.Show("Are you sure to delete " + _listCustomer[_indexSelect].CustomerName,
+                        "Confirm delete", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        // _customerRepository.DeleteCustomer(_listCustomer[_indexSelect].CustomerId);
+                        MessageBox.Show("Delete successfully ", "Notification");
+                        ShowAllFlower();
+                    }
+                    catch (Exception exception)
+                    {
+                        MessageBox.Show("Delete fail: " + exception.Message, "ERROR");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select an customer", "Warning");
+            }
+        }
+
+        private void OnClickUpdateFlower(object sender, RoutedEventArgs e)
+        {
+            if (_indexSelect != -1)
+            {
+                // CustomerEditor customerEditor = new CustomerEditor(_listCustomer[_indexSelect], OnFinishUpdateCustomer);
+                // customerEditor.Show();
+                // Hide();
+            }
+            else
+            {
+                MessageBox.Show("Please select an customer", "Warning");
+            }
+        }
+
+        private void OnClickAddNewFlower(object sender, RoutedEventArgs e)
+        {
+            // CustomerEditor customerEditor = new CustomerEditor(null, OnFinishCreateCustomer);
+            // customerEditor.Show();
+            // Hide();
+        }
+
+        private void OnFinishCreateFlower(Customer? newCustomer)
+        {
+            Show();
+            ShowAllFlower();
+            _indexSelect = -1;
+            FlowerView.SelectedIndex = -1;
+        }
+
+        private void OnFinishUpdateFlower(Customer? newCustomer)
+        {
+            Show();
+            ShowAllFlower();
+            _indexSelect = -1;
+            CustomerView.SelectedIndex = -1;
+        }
+
 
         #endregion
     }
