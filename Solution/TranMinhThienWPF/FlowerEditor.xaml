@@ -8,7 +8,8 @@
         Title="Flower Editor" Height="750" Width="400"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Loaded="Awake">
+        Loaded="Awake"
+        Unloaded="FlowerEditor_OnUnloaded">
     <Border BorderThickness="2">
         <Border.BorderBrush>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -42,8 +43,8 @@
                 <TextBlock Foreground="Red">*</TextBlock>
             </TextBlock>
             <TextBox x:Name="FlowerDes" FontSize="13" FontWeight="Medium" Foreground="Azure"
-                         Background="Transparent" CaretBrush="Linen" BorderBrush="#CA9CCA" BorderThickness="0,0,0,1"
-                         Margin="0,5,0,0">
+                     Background="Transparent" CaretBrush="Linen" BorderBrush="#CA9CCA" BorderThickness="0,0,0,1"
+                     Margin="0,5,0,0" TextWrapping="Wrap" MaxLength="200">
             </TextBox>
             
             <TextBlock  Foreground="Azure" TextAlignment="Left" FontSize="15" FontWeight="Medium" TextWrapping="Wrap"

@@ -9,12 +9,12 @@ namespace TranMinhThienWPF
 {
     public partial class FlowerEditor : Window
     {
-        private Action _onFinish;
-        private FlowerBouquet _updateFlower;
-        private bool _isUpdate;
-        private IFlowerBouquetRepository _flowerBouquetRepository = new FlowerBouquetRepository();
-        private ICategoryRepository _categoryRepository = new CategoryRepository();
-        private ISupplierRepository _supplierRepository = new SupplierRepository();
+        private readonly Action _onFinish;
+        private readonly FlowerBouquet _updateFlower;
+        private readonly bool _isUpdate;
+        private readonly IFlowerBouquetRepository _flowerBouquetRepository = new FlowerBouquetRepository();
+        private readonly ICategoryRepository _categoryRepository = new CategoryRepository();
+        private readonly ISupplierRepository _supplierRepository = new SupplierRepository();
 
         private List<Category> _categories = new();
         private List<Supplier> _suppliers = new();
@@ -22,8 +22,6 @@ namespace TranMinhThienWPF
         public FlowerEditor()
         {
             InitializeComponent();
-            InitCategoryComboBox();
-            InitSupplierComboBox();
         }
 
         public FlowerEditor(FlowerBouquet? updateFlower, Action onFinishUpdate)
@@ -85,7 +83,7 @@ namespace TranMinhThienWPF
 
         private int GetCategoryId()
         {
-            if (Supplier.SelectedIndex == -1)
+            if (Category.SelectedIndex == -1)
             {
                 return -1;
             }
@@ -141,6 +139,8 @@ namespace TranMinhThienWPF
 
         private void Awake(object sender, RoutedEventArgs e)
         {
+            InitCategoryComboBox();
+            InitSupplierComboBox();
             if (_isUpdate)
             {
                 FlowerName.Text = _updateFlower.FlowerBouquetName;
@@ -189,5 +189,10 @@ namespace TranMinhThienWPF
         }
 
         #endregion
+
+        private void FlowerEditor_OnUnloaded(object sender, RoutedEventArgs e)
+        {
+            _onFinish?.Invoke();
+        }
     }
 }

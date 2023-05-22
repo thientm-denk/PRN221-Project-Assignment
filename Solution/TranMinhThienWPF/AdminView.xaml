@@ -271,7 +271,7 @@
                     </TextBlock>
                     <TextBlock HorizontalAlignment="Center" Margin="0,30,0,0">
                         <Button Content="Show all flower" Foreground="Azure" FontWeight="Light"
-                                Margin="0,0,0,0" BorderThickness="0" Click="OnClickShowAllCustomer">
+                                Margin="0,0,0,0" BorderThickness="0" Click="OnClickShowAllFlower">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="#C120CF"></Setter>
@@ -325,7 +325,7 @@
                             </Button.Template>
                         </Button>
                         <Button Content="Update flower" Foreground="Azure" FontWeight="Light"
-                                Margin="0,0,0,0" BorderThickness="0" Click="OnClickUpdateCustomer">
+                                Margin="0,0,0,0" BorderThickness="0" Click="OnClickUpdateFlower">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="#C120CF"></Setter>
@@ -352,7 +352,7 @@
                             </Button.Template>
                         </Button>
                         <Button Content="Add new flower" Foreground="Azure" FontWeight="Light"
-                                Margin="0,0,0,0" BorderThickness="0" Click="OnClickAddNewCustomer">
+                                Margin="0,0,0,0" BorderThickness="0" Click="OnClickAddNewFlower">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="#C120CF"></Setter>
@@ -381,19 +381,28 @@
                     </TextBlock>
 
                     <ListView x:Name="FlowerView" Margin="0,30,0,0" Background="#E5E8F5" Height="300" Width="550"
-                              SelectionChanged="OnChangeSelectedCustomer">
+                              SelectionChanged="OnSelectionChangedFlower">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding CustomerId}" />
-                                <GridViewColumn Header="Email" Width="120" DisplayMemberBinding="{Binding Email}" />
-                                <GridViewColumn Header="Name" Width="110" DisplayMemberBinding="{Binding CustomerName}" />
-                                <GridViewColumn Header="City" Width="80" DisplayMemberBinding="{Binding City}" />
-                                <GridViewColumn Header="Country" Width="80" DisplayMemberBinding="{Binding Country}" />
-                                <GridViewColumn Header="Birthday" Width="80">
-                                    <GridViewColumn.DisplayMemberBinding>
-                                        <Binding Path="Birthday" StringFormat="dd/MM/yyyy" />
-                                    </GridViewColumn.DisplayMemberBinding>
+                                <GridViewColumn Header="ID" Width="30" DisplayMemberBinding="{Binding FlowerBouquetId}" />
+                                <GridViewColumn Header="Category" Width="60"
+                                                DisplayMemberBinding="{Binding CategoryId}" />
+                                <GridViewColumn Header="Name" Width="100"
+                                                DisplayMemberBinding="{Binding FlowerBouquetName}" />
+                                <GridViewColumn Header="Description" Width="140">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Description}" TextWrapping="Wrap" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
+                                <GridViewColumn Header="UnitPrice" Width="60"
+                                                DisplayMemberBinding="{Binding UnitPrice}" />
+                                <GridViewColumn Header="UnitsInStock" Width="80"
+                                                DisplayMemberBinding="{Binding UnitsInStock}" />
+                                <GridViewColumn Header="SupplierId" Width="80"
+                                                DisplayMemberBinding="{Binding SupplierId}" />
+
                             </GridView>
                         </ListView.View>
                     </ListView>

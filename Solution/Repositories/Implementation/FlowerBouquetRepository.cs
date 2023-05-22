@@ -44,7 +44,7 @@ namespace Repositories.Implementation
                 return "Name too long, below 30 character";
             }
 
-            if (description.Length > 50)
+            if (description.Length > 200)
             {
                 return "Description too long, below 50 character";
             }
@@ -96,7 +96,7 @@ namespace Repositories.Implementation
                 return "Name too long, below 30 character";
             }
 
-            if (description.Length > 50)
+            if (description.Length > 200)
             {
                 return "Description too long, below 50 character";
             }

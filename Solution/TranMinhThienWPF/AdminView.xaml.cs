@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using Repositories;
 using Repositories.Implementation;
 
@@ -15,8 +16,14 @@ namespace TranMinhThienWPF
     public partial class AdminView : Window
     {
         private ShowName _currentShow = ShowName.Customer;
+        // Customer
         private ICustomerRepository _customerRepository = new CustomerRepository();
         private List<Customer> _listCustomer = new();
+        
+        // Flower
+        private IFlowerBouquetRepository _flowerBouquetRepository = new FlowerBouquetRepository();
+        private List<FlowerBouquet> _listFlower = new ();
+        
         private int _indexSelect = -1;
 
         public AdminView()
@@ -68,11 +75,13 @@ namespace TranMinhThienWPF
         {
             CustomerManagement.Visibility = Visibility.Collapsed;
             FlowerManagement.Visibility = Visibility.Collapsed;
+            _indexSelect = -1;
             switch (_currentShow)
             {
                 case ShowName.Customer:
                 {
                     CustomerBtn.Style = (Style)Application.Current.Resources["MenuBtn"];
+                    CustomerView.SelectedIndex = -1;
                     break;
                 }
                 case ShowName.Order:
@@ -83,6 +92,7 @@ namespace TranMinhThienWPF
                 case ShowName.Flower:
                 {
                     FlowerBouquetBtn.Style = (Style)Application.Current.Resources["MenuBtn"];
+                    FlowerView.SelectedIndex = -1;
                     break;
                 }
             }
@@ -97,7 +107,7 @@ namespace TranMinhThienWPF
 
         #endregion
 
-        #region Customer Manager
+        #region View Manager
 
         private void ShowAllCustomer()
         {
@@ -116,8 +126,8 @@ namespace TranMinhThienWPF
         {
             try
             {
-                // _listCustomer = _customerRepository.GetAllCustomer();
-                // CustomerView.ItemsSource = _listCustomer;
+                _listFlower = _flowerBouquetRepository.GetAllFlower();
+                FlowerView.ItemsSource = _listFlower;
             }
             catch (Exception e)
             {
@@ -244,24 +254,24 @@ namespace TranMinhThienWPF
         {
             if (_indexSelect != -1)
             {
-                // CustomerEditor customerEditor = new CustomerEditor(_listCustomer[_indexSelect], OnFinishUpdateCustomer);
-                // customerEditor.Show();
-                // Hide();
+                FlowerEditor flowerEditor = new FlowerEditor(_listFlower[_indexSelect], OnFinishEditFlower);
+                flowerEditor.Show();
+                Hide();
             }
             else
             {
-                MessageBox.Show("Please select an customer", "Warning");
+                MessageBox.Show("Please select a flower", "Warning");
             }
         }
 
         private void OnClickAddNewFlower(object sender, RoutedEventArgs e)
         {
-            // CustomerEditor customerEditor = new CustomerEditor(null, OnFinishCreateCustomer);
-            // customerEditor.Show();
-            // Hide();
+            FlowerEditor flowerEditor = new FlowerEditor(null, OnFinishEditFlower);
+            flowerEditor.Show();
+            Hide();
         }
 
-        private void OnFinishCreateFlower(Customer? newCustomer)
+        private void OnFinishEditFlower()
         {
             Show();
             ShowAllFlower();
@@ -269,15 +279,12 @@ namespace TranMinhThienWPF
             FlowerView.SelectedIndex = -1;
         }
 
-        private void OnFinishUpdateFlower(Customer? newCustomer)
+        private void OnSelectionChangedFlower(object sender, SelectionChangedEventArgs e)
         {
-            Show();
-            ShowAllFlower();
-            _indexSelect = -1;
-            CustomerView.SelectedIndex = -1;
+            _indexSelect = FlowerView.SelectedIndex;
         }
-
-
         #endregion
+
+        
     }
 }
