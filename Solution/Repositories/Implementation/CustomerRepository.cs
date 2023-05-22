@@ -262,5 +262,40 @@ namespace Repositories.Implementation
 
             return "";
         }
+
+        public List<Customer> FindCustomer(int findCase, string value)
+        {
+            switch (findCase)
+            {
+                case 0:
+                {
+                    try
+                    {
+                        var newList = new List<Customer>();
+                        newList.Add(CustomerDao.Instance.GetCustomerById(int.Parse(value)));
+                        return newList;
+                    }
+                    catch (Exception e)
+                    {
+                        return new List<Customer>();
+                    }
+                }
+                case 1:
+                {
+                    return CustomerDao.Instance.GetCustomerByEmail(value);
+                    
+                }
+                case 2:
+                {
+                    return CustomerDao.Instance.GetCustomerByCity(value);
+                }
+                case 3:
+                {
+                    return CustomerDao.Instance.GetCustomerByCountry(value);
+                }
+            }
+
+            return null;
+        }
     }
 }

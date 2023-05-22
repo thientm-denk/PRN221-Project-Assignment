@@ -17,5 +17,6 @@ namespace Repositories
         public Customer Login(string email, string password);
         public string UpdateCustomer(Customer oldCustomer,string email,string oldPassword, string password, string confirmPass, string name, string city, string country, DateTime ?birthday);
         public string CreateCustomer(string email, string password, string confirmPass, string name, string city, string country, DateTime ?birthday);
+        public List<Customer> FindCustomer(int findCase, string value);
     }
 }

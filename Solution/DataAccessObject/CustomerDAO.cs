@@ -58,14 +58,19 @@ namespace DataAccessObject
             context.Customers.Update(customer);
             context.SaveChanges();
         }
-        public Customer Login(string email, string password)
+
+        public List<Customer> GetCustomerByEmail(string email)
         {
-            var customerLogin = context.Customers.Where(c => c.Email.ToUpper().Equals(email.ToUpper()) && c.Password.Equals(password)).ToList()[0];
-
-            return null;
-
+            return context.Customers.Where(cus => cus.Email.ToUpper().Contains(email.ToUpper())).ToList();
         }
-        
+        public List<Customer> GetCustomerByCity(string email)
+        {
+            return context.Customers.Where(cus => cus.City.ToUpper().Contains(email.ToUpper())).ToList();
+        }
+        public List<Customer> GetCustomerByCountry(string email)
+        {
+            return context.Customers.Where(cus => cus.Country.ToUpper().Contains(email.ToUpper())).ToList();
+        }
         public List<Customer> GetCustomerByInformation(int ?id, string ?email, string? cusName, string? city, string? county, DateTime? birthday)
         {
             var customerList = context.Customers.ToList();
