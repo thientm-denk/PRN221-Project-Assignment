@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using BussinessObject.Models;
 
@@ -20,16 +19,19 @@ namespace DataAccessObject
                     {
                         instance = new FlowerBouquetDAO();
                     }
+
                     return instance;
                 }
             }
         }
+
         private readonly FUFlowerBouquetManagementContext _context = new FUFlowerBouquetManagementContext();
+
         public List<FlowerBouquet> GetAllFlower()
         {
-            return _context.FlowerBouquets.ToList();
-        } 
-        
+            return _context.FlowerBouquets.Where(f => f.FlowerBouquetStatus != 0).ToList();
+        }
+
         public void AddFlower(FlowerBouquet flower)
         {
             var maxId = _context.FlowerBouquets.Max(c => c.FlowerBouquetId);
@@ -42,24 +44,35 @@ namespace DataAccessObject
         public void DeleteFlower(int id)
         {
             var flower = _context.FlowerBouquets.Where(c => c.FlowerBouquetId == id).ToList()[0];
-            _context.FlowerBouquets.Remove(flower);
-            _context.SaveChanges();
+            var isFlowerInOrder = _context.OrderDetails.Where(c => c.FlowerBouquetId == id).ToList().Count > 0;
+            if (isFlowerInOrder) // have in order --> Update status
+            {
+                flower.FlowerBouquetStatus = 0;
+                _context.FlowerBouquets.Update(flower);
+                _context.SaveChanges();
+            }
+            else // Not have in order --> Remove
+            {
+                _context.FlowerBouquets.Remove(flower);
+                _context.SaveChanges();
+            }
         }
-        
+
         public FlowerBouquet GetFlowerById(int id)
         {
             var flower = _context.FlowerBouquets.Where(c => c.FlowerBouquetId == id).ToList()[0];
             return flower;
         }
-        
+
         public void UpdateFlower(FlowerBouquet flower)
         {
             _context.FlowerBouquets.Update(flower);
             _context.SaveChanges();
         }
+
         public string GetFlowerName(int id)
         {
             return _context.FlowerBouquets.Where(p => p.FlowerBouquetId == id).ToList()[0].FlowerBouquetName;
-        } 
+        }
     }
 }

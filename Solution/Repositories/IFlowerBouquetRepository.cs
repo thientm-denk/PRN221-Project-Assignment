@@ -8,7 +8,7 @@ namespace Repositories
         public List<FlowerBouquet> GetAllFlower();
         public string GetFlowerName(int id);
 
-        public void DeleteFlower(int idCustomer);
+        public void DeleteFlower(int idFlower);
 
         public string UpdateFlower(FlowerBouquet oldFlower, int categoryId, string flowerName, string description,
             string unitPrice, string unitsInStock, int? supplierId);

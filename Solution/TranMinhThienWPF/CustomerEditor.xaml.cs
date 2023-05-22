@@ -83,9 +83,8 @@ namespace TranMinhThienWPF
                 UpdateCustomer();
                 return;
             }
-
             CreateCustomer();
-
+            
         }
 
         #endregion

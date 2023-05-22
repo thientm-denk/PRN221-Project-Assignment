@@ -227,14 +227,14 @@ namespace TranMinhThienWPF
             if (_indexSelect != -1)
             {
                 MessageBoxResult result =
-                    MessageBox.Show("Are you sure to delete " + _listCustomer[_indexSelect].CustomerName,
+                    MessageBox.Show("Are you sure to delete " + _listFlower[_indexSelect].FlowerBouquetName,
                         "Confirm delete", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
                 if (result == MessageBoxResult.Yes)
                 {
                     try
                     {
-                        // _customerRepository.DeleteCustomer(_listCustomer[_indexSelect].CustomerId);
+                        _flowerBouquetRepository.DeleteFlower(_listFlower[_indexSelect].FlowerBouquetId);
                         MessageBox.Show("Delete successfully ", "Notification");
                         ShowAllFlower();
                     }
