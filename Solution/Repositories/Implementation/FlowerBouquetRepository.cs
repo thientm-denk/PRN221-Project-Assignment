@@ -21,21 +21,20 @@ namespace Repositories.Implementation
         {
         }
 
-        public string UpdateFlower(FlowerBouquet oldFlower, string categoryId, string flowerName, string description,
+        public string UpdateFlower(FlowerBouquet oldFlower, int categoryId, string flowerName, string description,
             string unitPrice,
-            string unitsInStock, string? supplierId)
+            string unitsInStock, int? supplierId)
         {
             // Fill all the * information
            
-            if (string.IsNullOrEmpty(categoryId) || string.IsNullOrEmpty(flowerName) ||
+            if ( string.IsNullOrEmpty(flowerName) ||
                 string.IsNullOrEmpty(description) || string.IsNullOrEmpty(unitPrice) ||
                 string.IsNullOrEmpty(unitsInStock))
             {
                 return "Please fill all required information!";
             }
-
-            var categoryIdTmp = int.Parse(categoryId);
-            if (categoryIdTmp == -1)
+            
+            if (categoryId == -1)
             {
                 return "Please choose category!";
             }
@@ -64,20 +63,67 @@ namespace Repositories.Implementation
             }
 
             var updateFlower = oldFlower;
-            updateFlower.CategoryId = categoryIdTmp;
+            updateFlower.CategoryId = categoryId;
             updateFlower.FlowerBouquetName = flowerName;
             updateFlower.Description = description;
             updateFlower.UnitsInStock = unitsInStockTmp;
             updateFlower.UnitPrice = unitPriceTmp;
+            updateFlower.SupplierId = supplierId != -1 ? supplierId : null;
             
             FlowerBouquetDAO.Instance.UpdateFlower(updateFlower);
             return "";
         }
 
-        public string CreateFlower(string categoryId, string flowerName, string description, string unitPrice,
-            string unitsInStock,
-            string? flowerBouquetStatus, string? supplierId)
+        public string CreateFlower(int categoryId, string flowerName, string description, string unitPrice,
+            string unitsInStock, int? supplierId)
         {
+            // Fill all the * information
+           
+            if ( string.IsNullOrEmpty(flowerName) ||
+                 string.IsNullOrEmpty(description) || string.IsNullOrEmpty(unitPrice) ||
+                 string.IsNullOrEmpty(unitsInStock))
+            {
+                return "Please fill all required information!";
+            }
+            
+            if (categoryId == -1)
+            {
+                return "Please choose category!";
+            }
+
+            if (flowerName.Length > 30)
+            {
+                return "Name too long, below 30 character";
+            }
+
+            if (description.Length > 50)
+            {
+                return "Description too long, below 50 character";
+            }
+
+            // check number
+            decimal unitPriceTmp;
+            int unitsInStockTmp;
+            try
+            {
+                unitPriceTmp = decimal.Parse(unitPrice);
+                unitsInStockTmp = int.Parse(unitsInStock);
+            }
+            catch (Exception)
+            {
+                return "Unit price or unit in stock not valid";
+            }
+
+            var updateFlower = new FlowerBouquet();
+            updateFlower.CategoryId = categoryId;
+            updateFlower.FlowerBouquetName = flowerName;
+            updateFlower.Description = description;
+            updateFlower.UnitsInStock = unitsInStockTmp;
+            updateFlower.UnitPrice = unitPriceTmp;
+            updateFlower.FlowerBouquetStatus = 1;
+            updateFlower.SupplierId = supplierId != -1 ? supplierId : null;
+            
+            FlowerBouquetDAO.Instance.AddFlower(updateFlower);
             return "";
         }
     }
