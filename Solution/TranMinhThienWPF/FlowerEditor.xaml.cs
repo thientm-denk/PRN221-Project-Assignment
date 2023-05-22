@@ -73,16 +73,15 @@ namespace TranMinhThienWPF
         }
         private int GetSupplierId()
         {
-            if (string.IsNullOrEmpty(Supplier.Text) || Supplier.Text.Equals("None"))
+            if (Supplier.SelectedIndex == -1 || Supplier.SelectedIndex == 0)
             {
                 return -1;
             }
-
             return _suppliers[Supplier.SelectedIndex - 1].SupplierId;
         }
         private int GetCategoryId()
         {
-            if (string.IsNullOrEmpty(Category.Text))
+            if (Supplier.SelectedIndex == -1)
             {
                 return -1;
             }
@@ -90,7 +89,7 @@ namespace TranMinhThienWPF
             return _categories[Supplier.SelectedIndex].CategoryId;
         }
 
-        private void UpdateCustomer()
+        private void UpdateFlower()
         {
             try
             {
@@ -112,7 +111,7 @@ namespace TranMinhThienWPF
             }
            
         }
-        private void CreateCustomer()
+        private void CreateFlower()
         {
             try
             {
@@ -141,7 +140,14 @@ namespace TranMinhThienWPF
         }
         private void OnClickSubmit(object sender, RoutedEventArgs e)
         {
-           
+            if (_isUpdate)
+            {
+                UpdateFlower();
+            }
+            else
+            {
+                CreateFlower();
+            }
         }
         
 

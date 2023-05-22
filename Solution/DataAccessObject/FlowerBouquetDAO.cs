@@ -39,19 +39,20 @@ namespace DataAccessObject
             _context.SaveChanges();
         }
 
-        public void DeleteCustomer(int id)
+        public void DeleteFlower(int id)
         {
             var flower = _context.FlowerBouquets.Where(c => c.FlowerBouquetId == id).ToList()[0];
             _context.FlowerBouquets.Remove(flower);
             _context.SaveChanges();
         }
         
-        public FlowerBouquet GetCustomerById(int id)
+        public FlowerBouquet GetFlowerById(int id)
         {
             var flower = _context.FlowerBouquets.Where(c => c.FlowerBouquetId == id).ToList()[0];
             return flower;
         }
-        public void UpdateCustomer(FlowerBouquet flower)
+        
+        public void UpdateFlower(FlowerBouquet flower)
         {
             _context.FlowerBouquets.Update(flower);
             _context.SaveChanges();
