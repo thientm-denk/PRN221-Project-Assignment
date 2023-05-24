@@ -27,7 +27,7 @@ namespace Repositories.Implementation
             return OrderDAO.Instance.AddOrder(order);
         }
 
-        public int AddOrder(string customerId, DateTime? shippedDate, string total, string orderStatus,
+        public int AddOrder(int customerId, DateTime? shippedDate, string total, string orderStatus,
             out string message)
         {
             message = "";
@@ -36,22 +36,16 @@ namespace Repositories.Implementation
                 message = "Status cannot empty";
                 return -1;
             }
-            if (string.IsNullOrEmpty(customerId) )
-            {
-                message = "Customer cannot empty";
-                return -1;
-            }
             if (string.IsNullOrEmpty(total))
             {
                 message = "Total cannot empty";
                 return -1;
             }
-
-            int customerIdTmp = -1;
+            
             int totalTmp = -1;
             try
             {
-                customerIdTmp = int.Parse(customerId);
+              
                 totalTmp = int.Parse(total);
             }
             catch (Exception e)
@@ -62,7 +56,7 @@ namespace Repositories.Implementation
 
             return OrderDAO.Instance.AddOrder(new Order()
             {
-                CustomerId = customerIdTmp,
+                CustomerId =  customerId,
                 OrderDate = DateTime.Now,
                 OrderStatus = orderStatus,
                 ShippedDate = shippedDate,
@@ -70,7 +64,7 @@ namespace Repositories.Implementation
             });
         }
 
-        public int UpdateOrder(Order oldOrder, string customerId, DateTime? shippedDate, string total,
+        public int UpdateOrder(Order oldOrder, int customerId, DateTime? shippedDate, string total,
             string orderStatus,
             out string message)
         {
@@ -82,22 +76,15 @@ namespace Repositories.Implementation
                 message = "Status cannot empty";
                 return -1;
             }
-            if (string.IsNullOrEmpty(customerId) )
-            {
-                message = "Customer cannot empty";
-                return -1;
-            }
             if (string.IsNullOrEmpty(total))
             {
                 message = "Total cannot empty";
                 return -1;
             }
-
-            int customerIdTmp;
+            
             int totalTmp;
             try
             {
-                customerIdTmp = int.Parse(customerId);
                 totalTmp = int.Parse(total);
             }
             catch (Exception e)
@@ -106,7 +93,7 @@ namespace Repositories.Implementation
                 return -1;
             }
 
-            orderUpdate.CustomerId = customerIdTmp;
+            orderUpdate.CustomerId = customerId;
             orderUpdate.OrderDate = DateTime.Now;
             orderUpdate.OrderStatus = orderStatus;
             orderUpdate.ShippedDate = shippedDate;

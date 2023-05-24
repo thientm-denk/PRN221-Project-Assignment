@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TranMinhThienWPF"
         mc:Ignorable="d"
-        Title="Login" Height="550" Width="800"
+        Title="Customer" Height="550" Width="800"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Loaded="Awake">
