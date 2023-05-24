@@ -13,7 +13,7 @@ namespace Repositories.Implementation
 
         public void AddOrderDetails(List<OrderDetail> orderDetails)
         {
-            throw new System.NotImplementedException();
+            OderDetailDao.Instance.AddOrderDetails(orderDetails);
         }
     }
 }
