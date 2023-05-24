@@ -12,7 +12,7 @@ namespace Repositories
         public int AddOrder(Order order);
         public int AddOrder(string customerId, DateTime? shippedDate, string total, string orderStatus, out string message);
         
-        public int UpdateOrder(Order oldOrder,string? customerId, DateTime? shippedDate, string? total, string orderStatus,  out string message);
+        public int UpdateOrder(Order oldOrder,string customerId, DateTime? shippedDate, string total, string orderStatus,  out string message);
 
     }
 }
