@@ -25,55 +25,55 @@ namespace DataAccessObject
             }
         }
 
-        FUFlowerBouquetManagementContext context = new FUFlowerBouquetManagementContext();
+        readonly FUFlowerBouquetManagementContext _context = new FUFlowerBouquetManagementContext();
 
         public List<Customer> GetAllCustomer()
         {
-            return context.Customers.ToList();
+            return _context.Customers.ToList();
         }
 
         public void AddCustomer(Customer customer)
         {
-            var maxId = context.Customers.Max(c => c.CustomerId);
+            var maxId = _context.Customers.Max(c => c.CustomerId);
             customer.CustomerId = maxId + 1;
 
-            context.Customers.Add(customer);
-            context.SaveChanges();
+            _context.Customers.Add(customer);
+            _context.SaveChanges();
         }
 
         public void DeleteCustomer(int id)
         {
-            var customer = context.Customers.Where(c => c.CustomerId == id).ToList()[0];
-            context.Customers.Remove(customer);
-            context.SaveChanges();
+            var customer = _context.Customers.Where(c => c.CustomerId == id).ToList()[0];
+            _context.Customers.Remove(customer);
+            _context.SaveChanges();
         }
         
         public Customer GetCustomerById(int id)
         {
-            var customer = context.Customers.Where(c => c.CustomerId == id).ToList()[0];
+            var customer = _context.Customers.Where(c => c.CustomerId == id).ToList()[0];
             return customer;
         }
         public void UpdateCustomer(Customer customer)
         {
-            context.Customers.Update(customer);
-            context.SaveChanges();
+            _context.Customers.Update(customer);
+            _context.SaveChanges();
         }
 
         public List<Customer> GetCustomerByEmail(string email)
         {
-            return context.Customers.Where(cus => cus.Email.ToUpper().Contains(email.ToUpper())).ToList();
+            return _context.Customers.Where(cus => cus.Email.ToUpper().Contains(email.ToUpper())).ToList();
         }
         public List<Customer> GetCustomerByCity(string email)
         {
-            return context.Customers.Where(cus => cus.City.ToUpper().Contains(email.ToUpper())).ToList();
+            return _context.Customers.Where(cus => cus.City.ToUpper().Contains(email.ToUpper())).ToList();
         }
         public List<Customer> GetCustomerByCountry(string email)
         {
-            return context.Customers.Where(cus => cus.Country.ToUpper().Contains(email.ToUpper())).ToList();
+            return _context.Customers.Where(cus => cus.Country.ToUpper().Contains(email.ToUpper())).ToList();
         }
         public List<Customer> GetCustomerByName(string name)
         {
-            return context.Customers.Where(cus => cus.CustomerName.ToUpper().Contains(name.ToUpper())).ToList();
+            return _context.Customers.Where(cus => cus.CustomerName.ToUpper().Contains(name.ToUpper())).ToList();
         }
 
     }

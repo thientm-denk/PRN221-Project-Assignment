@@ -27,6 +27,16 @@ namespace DataAccessObject
             }
         }
 
+        private int AddOrder(Order order)
+        {
+            var maxId = _context.Orders.Max(c => c.OrderId);
+            maxId++;
+            order.OrderId = maxId;
+
+            _context.Orders.Add(order);
+            _context.SaveChanges();
+            return 1;
+        }
         private FUFlowerBouquetManagementContext _context = new FUFlowerBouquetManagementContext();
         public List<Order> GetOrdersByCustomer(int customerId)
         {
