@@ -6,5 +6,6 @@ namespace Repositories
     public interface IOrderRepository
     {
         public List<Order> GetOrdersByCustomer(int customerId);
+        public List<Order> GetAllOrders();
     }
 }

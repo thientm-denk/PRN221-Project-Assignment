@@ -10,5 +10,10 @@ namespace Repositories.Implementation
         {
             return OrderDAO.Instance.GetOrdersByCustomer(customerId);
         }
+        
+        public List<Order> GetAllOrders()
+        {
+            return OrderDAO.Instance.GetAllOrder();
+        }
     }
 }

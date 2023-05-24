@@ -158,7 +158,6 @@ namespace TranMinhThienWPF
         {
             if(_orderSelectIndex != OrderView.SelectedIndex)
             {
-               
                 _orderSelectIndex = OrderView.SelectedIndex;
                 LoadDataOrderDetail(_orders[_orderSelectIndex].OrderId);
                 UpdateOrderDetailListView();

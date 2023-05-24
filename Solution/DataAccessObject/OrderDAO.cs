@@ -33,6 +33,10 @@ namespace DataAccessObject
             return _context.Orders.Where(o => o.CustomerId == customerId).ToList();
         }
         
-        
+        public List<Order> GetAllOrder()
+        {
+            return _context.Orders.ToList();
+        }
+
     }
 }
