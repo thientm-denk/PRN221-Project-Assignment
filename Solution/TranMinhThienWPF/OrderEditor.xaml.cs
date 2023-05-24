@@ -99,7 +99,7 @@ namespace TranMinhThienWPF
             LoadFlower();
             ShowAllCustomer();
             ShowAllFlower();
-            ShipDate.DisplayDateStart = DateTime.Now;
+            ShipDate.DisplayDateStart = DateTime.Now.Add(new TimeSpan(1, 0, 0, 0));
             if (_isUpdate)
             {
                 LoadOderDetails();
@@ -107,22 +107,41 @@ namespace TranMinhThienWPF
                 ShipDate.SelectedDate = _updateOrder.ShippedDate;
                 if (_updateOrder.CustomerId != null)
                 {
-                    var index = 1;
+                    var index = -1;
+
                     foreach (var customer in _listCustomer)
                     {
                         if (customer.CustomerId == _updateOrder.CustomerId)
                         {
+                            index++;
                             break;
                         }
 
-                        index++;
+                 
                     }
 
-                    CustomerName.SelectedIndex = index;
+                    CustomerName.SelectedIndex = index+1;
+                }
+            }
+            InitCheckBox();
+        }
+
+        private void InitCheckBox()
+        {
+            if (ShipDate.SelectedDate == null || ShipDate.SelectedDate > DateTime.Now)
+            {
+                IsShipped.Visibility = Visibility.Collapsed;
+                IsShipped.IsChecked = false;
+            }
+            else
+            {
+                IsShipped.Visibility = Visibility.Visible;
+                if (_updateOrder.OrderStatus.ToUpper().Contains("DONE"))
+                {
+                    IsShipped.IsChecked = true;
                 }
             }
         }
-
         private void CreateOrder()
         {
             if (_listOrderDetail.Count == 0)
@@ -131,8 +150,8 @@ namespace TranMinhThienWPF
                 return;
             }
 
-            int? customerId = CustomerName.SelectedIndex > 1
-                ? _listCustomer[CustomerName.SelectedIndex].CustomerId
+            int? customerId = CustomerName.SelectedIndex > 0
+                ? _listCustomer[CustomerName.SelectedIndex - 1].CustomerId
                 : null;
 
 
@@ -160,7 +179,7 @@ namespace TranMinhThienWPF
             }
 
             MessageBox.Show("Create successfully");
-            _onFinish?.Invoke();
+            Close();
         }
 
         private void UpdateOrder()
@@ -171,12 +190,12 @@ namespace TranMinhThienWPF
                 return;
             }
 
-            int? customerId = CustomerName.SelectedIndex > 1
-                ? _listCustomer[CustomerName.SelectedIndex - 2].CustomerId
+            int? customerId = CustomerName.SelectedIndex > 0
+                ? _listCustomer[CustomerName.SelectedIndex - 1].CustomerId
                 : null;
 
             var orderId = _orderRepository.UpdateOrder(_updateOrder, customerId, ShipDate.SelectedDate, TotalPrice.Text,
-                "Shipping",
+                IsShipped.IsChecked == true? "Done" : "Shipping",
                 out var message);
             if (!string.IsNullOrEmpty(message))
             {
@@ -200,7 +219,7 @@ namespace TranMinhThienWPF
             }
 
             MessageBox.Show("Create successfully");
-            _onFinish?.Invoke();
+            Close();
         }
 
         private void OnClickSubmit(object sender, RoutedEventArgs e)
@@ -222,7 +241,6 @@ namespace TranMinhThienWPF
 
         private void OnClickCancel(object sender, RoutedEventArgs e)
         {
-            _onFinish?.Invoke();
             Close();
         }
 
