@@ -32,13 +32,7 @@ namespace Repositories.Implementation
         {
             return CustomerDao.Instance.GetCustomerById(id);
         }
-
-        public List<Customer> GetCustomerByInformation(int? id, string email, string cusName, string city,
-            string county,
-            DateTime? birthday)
-        {
-            return CustomerDao.Instance.GetCustomerByInformation(id, email, cusName, city, county, birthday);
-        }
+        
 
         public Customer Login(string email, string password)
         {
@@ -269,21 +263,13 @@ namespace Repositories.Implementation
             {
                 case 0:
                 {
-                    try
-                    {
-                        var newList = new List<Customer>();
-                        newList.Add(CustomerDao.Instance.GetCustomerById(int.Parse(value)));
-                        return newList;
-                    }
-                    catch (Exception e)
-                    {
-                        return new List<Customer>();
-                    }
+                    var newList = new List<Customer>();
+                    newList.Add(CustomerDao.Instance.GetCustomerById(int.Parse(value)));
+                    return newList;
                 }
                 case 1:
                 {
                     return CustomerDao.Instance.GetCustomerByEmail(value);
-                    
                 }
                 case 2:
                 {
@@ -292,6 +278,10 @@ namespace Repositories.Implementation
                 case 3:
                 {
                     return CustomerDao.Instance.GetCustomerByCountry(value);
+                }
+                case 4:
+                {
+                    return CustomerDao.Instance.GetCustomerByName(value);
                 }
             }
 

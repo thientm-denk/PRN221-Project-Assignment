@@ -11,8 +11,6 @@ namespace Repositories
         public void DeleteCustomer(int idCustomer);
         public List<Customer> GetAllCustomer();
         public Customer GetCustomerById(int id);
-        public List<Customer> GetCustomerByInformation(int? id, string? email, string? cusName, string? city,
-            string? county, DateTime? birthday);
 
         public Customer Login(string email, string password);
         public string UpdateCustomer(Customer oldCustomer,string email,string oldPassword, string password, string confirmPass, string name, string city, string country, DateTime ?birthday);

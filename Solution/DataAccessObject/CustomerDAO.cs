@@ -71,37 +71,10 @@ namespace DataAccessObject
         {
             return context.Customers.Where(cus => cus.Country.ToUpper().Contains(email.ToUpper())).ToList();
         }
-        public List<Customer> GetCustomerByInformation(int ?id, string ?email, string? cusName, string? city, string? county, DateTime? birthday)
+        public List<Customer> GetCustomerByName(string name)
         {
-            var customerList = context.Customers.ToList();
-
-            if (id != null)
-            {
-
-            }
-            if (email != null)
-            {
-
-            }
-            if (cusName != null)
-            {
-
-            }
-            if (city != null)
-            {
-
-            }
-            if (county != null)
-            {
-
-            }
-            if (birthday != null)
-            {
-
-            }
-            return customerList;
+            return context.Customers.Where(cus => cus.CustomerName.ToUpper().Contains(name.ToUpper())).ToList();
         }
-
 
     }
 }

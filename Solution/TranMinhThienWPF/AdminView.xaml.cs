@@ -33,7 +33,7 @@ namespace TranMinhThienWPF
             CustomerBtn.Style = (Style)Application.Current.Resources["MenuButtonActive"];
             _currentShow = ShowName.Customer;
             CustomerManagement.Visibility = Visibility.Visible;
-            ShowAllCustomer();
+            LoadAndShowAllCustomer();
         }
 
         #region View Manager
@@ -46,7 +46,7 @@ namespace TranMinhThienWPF
                 CustomerBtn.Style = (Style)Application.Current.Resources["MenuButtonActive"];
                 _currentShow = ShowName.Customer;
                 CustomerManagement.Visibility = Visibility.Visible;
-                ShowAllCustomer();
+                LoadAndShowAllCustomer();
             }
         }
 
@@ -108,8 +108,29 @@ namespace TranMinhThienWPF
         #endregion
 
         #region View Manager
-
+        private void ShowAllFlower()
+        {
+            try
+            {
+                CustomerView.ItemsSource = _listCustomer;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "ERROR");
+            }
+        }
         private void ShowAllCustomer()
+        {
+            try
+            {
+                CustomerView.ItemsSource = _listCustomer;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "ERROR");
+            }
+        }
+        private void LoadAndShowAllCustomer()
         {
             try
             {
@@ -122,7 +143,7 @@ namespace TranMinhThienWPF
             }
         }
 
-        private void ShowAllFlower()
+        private void LoadAndShowAllFlower()
         {
             try
             {
@@ -137,6 +158,32 @@ namespace TranMinhThienWPF
         #endregion
 
         #region CUSTOMER Event
+        private void OnClickSearchCustomer(object sender, RoutedEventArgs routedEventArgs)
+        {
+            try
+            {
+                _listCustomer = _customerRepository.FindCustomer(4, SearchValue.Text);
+                ShowAllCustomer();
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+                throw;
+            }
+        }
+        private void OnClickSearchFlower(object sender, RoutedEventArgs routedEventArgs)
+        {
+            try
+            {
+                _listCustomer = _customerRepository.FindCustomer(0, SearchValue.Text);
+                ShowAllFlower();
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+                throw;
+            }
+        }
 
         private void OnChangeSelectedCustomer(object sender, SelectionChangedEventArgs e)
         {
@@ -145,7 +192,7 @@ namespace TranMinhThienWPF
 
         private void OnClickShowAllCustomer(object sender, RoutedEventArgs e)
         {
-            ShowAllCustomer();
+            LoadAndShowAllCustomer();
         }
 
         private void OnClickDeleteCustomer(object sender, RoutedEventArgs e)
@@ -162,7 +209,7 @@ namespace TranMinhThienWPF
                     {
                         _customerRepository.DeleteCustomer(_listCustomer[_indexSelect].CustomerId);
                         MessageBox.Show("Delete successfully ", "Notification");
-                        ShowAllCustomer();
+                        LoadAndShowAllCustomer();
                     }
                     catch (Exception exception)
                     {
@@ -200,7 +247,7 @@ namespace TranMinhThienWPF
         private void OnFinishCreateCustomer(Customer? newCustomer)
         {
             Show();
-            ShowAllCustomer();
+            LoadAndShowAllCustomer();
             _indexSelect = -1;
             CustomerView.SelectedIndex = -1;
         }
@@ -208,7 +255,7 @@ namespace TranMinhThienWPF
         private void OnFinishUpdateCustomer(Customer? newCustomer)
         {
             Show();
-            ShowAllCustomer();
+            LoadAndShowAllCustomer();
             _indexSelect = -1;
             CustomerView.SelectedIndex = -1;
         }
@@ -219,7 +266,7 @@ namespace TranMinhThienWPF
 
         private void OnClickShowAllFlower(object sender, RoutedEventArgs e)
         {
-            ShowAllFlower();
+            LoadAndShowAllFlower();
         }
 
         private void OnClickDeleteFlower(object sender, RoutedEventArgs e)
@@ -236,7 +283,7 @@ namespace TranMinhThienWPF
                     {
                         _flowerBouquetRepository.DeleteFlower(_listFlower[_indexSelect].FlowerBouquetId);
                         MessageBox.Show("Delete successfully ", "Notification");
-                        ShowAllFlower();
+                        LoadAndShowAllFlower();
                     }
                     catch (Exception exception)
                     {
@@ -274,7 +321,7 @@ namespace TranMinhThienWPF
         private void OnFinishEditFlower()
         {
             Show();
-            ShowAllFlower();
+            LoadAndShowAllFlower();
             _indexSelect = -1;
             FlowerView.SelectedIndex = -1;
         }

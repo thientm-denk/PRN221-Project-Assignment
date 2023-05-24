@@ -71,7 +71,7 @@
 
                         </ComboBox>
                         <Button Content="Search" Foreground="Azure" FontWeight="Light"
-                                Margin="0,10,0,0" BorderThickness="0">
+                                Margin="0,10,0,0" BorderThickness="0" Click="OnClickSearchCustomer">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="#C120CF"></Setter>
@@ -242,7 +242,7 @@
 
                         </ComboBox>
                         <Button Content="Search" Foreground="Azure" FontWeight="Light"
-                                Margin="0,10,0,0" BorderThickness="0">
+                                Margin="0,10,0,0" BorderThickness="0" Click="OnClickSearchFlower">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="#C120CF"></Setter>
