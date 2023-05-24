@@ -8,7 +8,8 @@
         Title="Customer" Height="550" Width="800"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Loaded="Awake">
+        Loaded="Awake"
+        Unloaded="OnClickCancel">
     <Border BorderThickness="2">
         <Border.BorderBrush>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">

@@ -19,14 +19,21 @@ namespace TranMinhThienWPF
         private IFlowerBouquetRepository _flowerBouquetRepository = new FlowerBouquetRepository();
         private IOrderRepository _orderRepository = new OrderRepository();
         private IOrderDetailRepository _orderDetailRepository = new OrderDetailRepository();
-        
+
+        private Action _onFinish;
         public OrderEditor()
         {
             InitializeComponent();
             _updateOrder = null;
             _isUpdate = false;
         }
-    
+        public OrderEditor(Action onFinish)
+        {
+            InitializeComponent();
+            _onFinish = onFinish;
+            _updateOrder = null;
+            _isUpdate = false;
+        }
         public OrderEditor(Order updateOrder)
         {
             InitializeComponent();
@@ -92,8 +99,14 @@ namespace TranMinhThienWPF
                 
             }
         }
-        private void OnClickSubmit(object sender, RoutedEventArgs e)
+
+        private void CreateOrder()
         {
+            if (_listOrderDetail.Count == 0)
+            {
+                MessageBox.Show("List order detail cannot null", "ERROR");
+                return;
+            }
             int ?customerId = CustomerName.SelectedIndex > 1
                 ? _listCustomer[CustomerName.SelectedIndex].CustomerId
                 : null;
@@ -123,18 +136,32 @@ namespace TranMinhThienWPF
             }
             
             MessageBox.Show("Create successfully");
+            _onFinish?.Invoke();
+        }
+        private void OnClickSubmit(object sender, RoutedEventArgs e)
+        {
+            if (_isUpdate)
+            {
+                
+            }
+            else
+            {
+                CreateOrder();
+            }
         }
 
-        private void OnClickCancel(object sender, RoutedEventArgs e)
-        {
-           
-        }
+     
 
         private void OnChangeSelectedFlower(object sender, SelectionChangedEventArgs e)
         {
             
         }
-
+        
+        private void OnClickCancel(object sender, RoutedEventArgs e)
+        {
+            _onFinish?.Invoke();
+            Close();
+        }
         private void OnClickRemove(object sender, RoutedEventArgs e)
         {
             if (FlowerView.SelectedIndex != -1)

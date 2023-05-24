@@ -440,6 +440,8 @@ namespace TranMinhThienWPF
                     {
                          _orderRepository.DeleteOrder(_listOrder[_indexSelect].OrderId);
                         MessageBox.Show("Delete successfully ", "Notification");
+                        _indexSelect = -1;
+                        OrderView.SelectedIndex = -1;
                         LoadDataOrder();
                         ShowOrder();
                         ClearOrderDetail();
@@ -463,7 +465,18 @@ namespace TranMinhThienWPF
 
         private void OnClickAddNewOrder(object sender, RoutedEventArgs e)
         {
-            
+            OrderEditor orderEditor = new OrderEditor(OnFinishEditOrder);
+            orderEditor.Show();
+            Hide();
+        }
+        private void OnFinishEditOrder()
+        {
+            Show();
+            LoadDataOrder();
+            ShowOrder();
+            _indexSelect = -1;
+            OrderView.SelectedIndex = -1;
+            ShowOrderDetail();
         }
         #endregion
 
