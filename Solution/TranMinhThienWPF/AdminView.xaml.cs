@@ -68,6 +68,7 @@ namespace TranMinhThienWPF
                 FlowerBouquetBtn.Style = (Style)Application.Current.Resources["MenuButtonActive"];
                 FlowerManagement.Visibility = Visibility.Visible;
                 _currentShow = ShowName.Flower;
+                LoadAndShowAllFlower();
             }
         }
 
@@ -112,7 +113,7 @@ namespace TranMinhThienWPF
         {
             try
             {
-                CustomerView.ItemsSource = _listCustomer;
+                FlowerView.ItemsSource = _listFlower;
             }
             catch (Exception e)
             {
@@ -162,26 +163,12 @@ namespace TranMinhThienWPF
         {
             try
             {
-                _listCustomer = _customerRepository.FindCustomer(4, SearchValue.Text);
+                _listCustomer = _customerRepository.FindCustomer(4, SearchValueCustomer.Text);
                 ShowAllCustomer();
             }
             catch (Exception exception)
             {
-                Console.WriteLine(exception);
-                throw;
-            }
-        }
-        private void OnClickSearchFlower(object sender, RoutedEventArgs routedEventArgs)
-        {
-            try
-            {
-                _listCustomer = _customerRepository.FindCustomer(0, SearchValue.Text);
-                ShowAllFlower();
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception);
-                throw;
+                MessageBox.Show(exception.Message, "ERROR");
             }
         }
 
@@ -263,6 +250,18 @@ namespace TranMinhThienWPF
         #endregion
 
         #region Flower Event
+        private void OnClickSearchFlower(object sender, RoutedEventArgs routedEventArgs)
+        {
+            try
+            {
+                _listFlower = _flowerBouquetRepository.FindFlower(0, SearchValueFlower.Text);
+                ShowAllFlower();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, "ERROR");
+            }
+        }
 
         private void OnClickShowAllFlower(object sender, RoutedEventArgs e)
         {

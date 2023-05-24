@@ -127,5 +127,19 @@ namespace Repositories.Implementation
             FlowerBouquetDAO.Instance.AddFlower(updateFlower);
             return "";
         }
+
+        public List<FlowerBouquet> FindFlower(int findCase, string value)
+        {
+            switch (findCase)
+            {
+                case 0:
+                {
+                    return FlowerBouquetDAO.Instance.GetCustomerByName(value);
+                }
+              
+            }
+
+            return null;
+        }
     }
 }

@@ -264,7 +264,12 @@ namespace Repositories.Implementation
                 case 0:
                 {
                     var newList = new List<Customer>();
-                    newList.Add(CustomerDao.Instance.GetCustomerById(int.Parse(value)));
+                    var customer = CustomerDao.Instance.GetCustomerById(int.Parse(value));
+                    if (customer !=null)
+                    {
+                        newList.Add(customer);
+                    }
+              
                     return newList;
                 }
                 case 1:

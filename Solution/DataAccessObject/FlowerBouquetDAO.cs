@@ -63,6 +63,10 @@ namespace DataAccessObject
             var flower = _context.FlowerBouquets.Where(c => c.FlowerBouquetId == id).ToList()[0];
             return flower;
         }
+        public List<FlowerBouquet> GetCustomerByName(string name)
+        {
+            return _context.FlowerBouquets.Where(cus => cus.FlowerBouquetName.ToUpper().Contains(name.ToUpper())).ToList();
+        }
 
         public void UpdateFlower(FlowerBouquet flower)
         {
