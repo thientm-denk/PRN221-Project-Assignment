@@ -117,6 +117,10 @@ namespace TranMinhThienWPF
         
         // Oder
 
+        private void ClearOrderDetail()
+        {
+            OrderDetailView.ItemsSource = null;
+        }
         private void ShowOrderDetail()
         {
             var viewModel = new List<OrderDetailViewModel>();
@@ -163,6 +167,10 @@ namespace TranMinhThienWPF
         }
         private void LoadDataOrderDetail(int id)
         {
+            if (id == -1)
+            {
+                _listOrderDetails = new List<OrderDetail>();
+            }
             try
             {
                 _listOrderDetails = _orderDetailRepository.GetOrderDetailById(id);
@@ -426,14 +434,15 @@ namespace TranMinhThienWPF
                 MessageBoxResult result =
                     MessageBox.Show("Are you sure to delete " + _listOrder[_indexSelect].OrderId,
                         "Confirm delete", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
                 if (result == MessageBoxResult.Yes)
                 {
                     try
                     {
-                        _flowerBouquetRepository.DeleteFlower(_listFlower[_indexSelect].FlowerBouquetId);
+                         _orderRepository.DeleteOrder(_listOrder[_indexSelect].OrderId);
                         MessageBox.Show("Delete successfully ", "Notification");
-                        LoadAndShowAllFlower();
+                        LoadDataOrder();
+                        ShowOrder();
+                        ClearOrderDetail();
                     }
                     catch (Exception exception)
                     {

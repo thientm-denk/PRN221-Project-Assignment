@@ -38,5 +38,11 @@ namespace DataAccessObject
             return _context.Orders.ToList();
         }
 
+        public void DeleteOrder(int id)
+        {
+            var customer = _context.Orders.Where(c => c.OrderId == id).ToList()[0];
+            _context.Orders.Remove(customer);
+            _context.SaveChanges();
+        }
     }
 }

@@ -15,5 +15,10 @@ namespace Repositories.Implementation
         {
             return OrderDAO.Instance.GetAllOrder();
         }
+
+        public void DeleteOrder(int id)
+        {
+            OrderDAO.Instance.DeleteOrder(id);
+        }
     }
 }

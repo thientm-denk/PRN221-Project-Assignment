@@ -7,5 +7,6 @@ namespace Repositories
     {
         public List<Order> GetOrdersByCustomer(int customerId);
         public List<Order> GetAllOrders();
+        public void DeleteOrder(int id);
     }
 }
