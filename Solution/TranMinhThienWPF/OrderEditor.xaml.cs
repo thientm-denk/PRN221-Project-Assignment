@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using BussinessObject.Models;
@@ -44,7 +45,18 @@ namespace TranMinhThienWPF
             {
                 CustomerName.Items.Add(customer.CustomerName);
             }
+        }
+        private void ShowAllOrderDetail()
+        {
+            OrderDetailView.ItemsSource = null;
+            OrderDetailView.ItemsSource = _listOrderDetail;
+            decimal totalPrice = 0;
+            foreach (var orderDetail in _listOrderDetail)
+            {
+                totalPrice += (orderDetail.UnitPrice + decimal.Parse(orderDetail.Quantity.ToString()));
+            }
             
+            TotalPrice.Text = totalPrice.ToString();
         }
         #region Controller
 
@@ -70,6 +82,7 @@ namespace TranMinhThienWPF
             LoadOderDetails();
             ShowAllCustomer();
             ShowAllFlower();
+            ShipDate.DisplayDateStart = DateTime.Now;
             if (_isUpdate)
             {
                 LoadOderDetails();
@@ -81,7 +94,35 @@ namespace TranMinhThienWPF
         }
         private void OnClickSubmit(object sender, RoutedEventArgs e)
         {
-            throw new System.NotImplementedException();
+            int ?customerId = CustomerName.SelectedIndex > 1
+                ? _listCustomer[CustomerName.SelectedIndex].CustomerId
+                : null;
+
+            
+            var orderId = _orderRepository.AddOrder(customerId, ShipDate.SelectedDate, TotalPrice.Text, "Shipping",
+                out var message);
+            if (!string.IsNullOrEmpty(message))
+            {
+                MessageBox.Show(message, "ERROR");
+                return;
+            }
+
+            foreach (var orderDetail in _listOrderDetail)
+            {
+                orderDetail.OrderId = orderId;
+            }
+
+            try
+            {
+                _orderDetailRepository.AddOrderDetails(_listOrderDetail);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, "ERROR");
+                return;
+            }
+            
+            MessageBox.Show("Create successfully");
         }
 
         private void OnClickCancel(object sender, RoutedEventArgs e)
@@ -96,26 +137,76 @@ namespace TranMinhThienWPF
 
         private void OnClickRemove(object sender, RoutedEventArgs e)
         {
-           
+            if (FlowerView.SelectedIndex != -1)
+            {
+                foreach (var orderDetail in _listOrderDetail)
+                {
+                    if (orderDetail.FlowerBouquetId == _listFlowerBouquets[FlowerView.SelectedIndex].FlowerBouquetId)
+                    {
+                        orderDetail.Quantity--;
+                        break;
+                    }
+                }
+            }
+
+            OrderDetail removeItem = null;
+            foreach (var orderDetail in _listOrderDetail)
+            {
+                if (orderDetail.Quantity <= 0)
+                {
+                    removeItem = orderDetail;
+                }
+            }
+
+            if (removeItem != null)
+            {
+                _listOrderDetail.Remove(removeItem);
+            }
+        
+     
+            ShowAllOrderDetail();
         }
 
         private void OnClickAdd(object sender, RoutedEventArgs e)
         {
-            throw new System.NotImplementedException();
+            if (FlowerView.SelectedIndex != -1)
+            {
+                foreach (var orderDetail in _listOrderDetail)
+                {
+                    if (orderDetail.FlowerBouquetId == _listFlowerBouquets[FlowerView.SelectedIndex].FlowerBouquetId)
+                    {
+                        orderDetail.Quantity++;
+                        ShowAllOrderDetail();
+                        return;
+                    }
+                }
+                _listOrderDetail.Add(new OrderDetail()
+                {
+                    Discount = 0,
+                    FlowerBouquetId = _listFlowerBouquets[FlowerView.SelectedIndex].FlowerBouquetId,
+                    OrderId = -1,
+                    UnitPrice = _listFlowerBouquets[FlowerView.SelectedIndex].UnitPrice,
+                    Quantity = 1
+                });
+            }
+
+            ShowAllOrderDetail();
+
         }
 
         private void OnClickRemoveAll(object sender, RoutedEventArgs e)
         {
-            throw new System.NotImplementedException();
+            _listOrderDetail = new List<OrderDetail>();
+            ShowAllOrderDetail();
         }
 
         private void OnClickRemoveOne(object sender, RoutedEventArgs e)
         {
-            throw new System.NotImplementedException();
+          
         }
         private void OnChangeSelectedDetails(object sender, SelectionChangedEventArgs e)
         {
-            throw new System.NotImplementedException();
+           
         }
         #endregion
 

@@ -37,7 +37,7 @@ namespace DataAccessObject
 
             _context.Orders.Add(order);
             _context.SaveChanges();
-            return 1;
+            return maxId;
         }
         
         public void Update(Order order)

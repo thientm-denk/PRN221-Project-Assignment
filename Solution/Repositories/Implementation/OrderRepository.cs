@@ -27,7 +27,7 @@ namespace Repositories.Implementation
             return OrderDAO.Instance.AddOrder(order);
         }
 
-        public int AddOrder(int customerId, DateTime? shippedDate, string total, string orderStatus,
+        public int AddOrder(int ?customerId, DateTime? shippedDate, string total, string orderStatus,
             out string message)
         {
             message = "";
@@ -42,11 +42,10 @@ namespace Repositories.Implementation
                 return -1;
             }
             
-            int totalTmp = -1;
+            decimal totalTmp = 0;
             try
             {
-              
-                totalTmp = int.Parse(total);
+                totalTmp = decimal.Parse(total);
             }
             catch (Exception e)
             {
@@ -56,7 +55,7 @@ namespace Repositories.Implementation
 
             return OrderDAO.Instance.AddOrder(new Order()
             {
-                CustomerId =  customerId,
+                CustomerId = customerId,
                 OrderDate = DateTime.Now,
                 OrderStatus = orderStatus,
                 ShippedDate = shippedDate,
