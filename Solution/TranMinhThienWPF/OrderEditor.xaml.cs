@@ -1,6 +1,9 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 using BussinessObject.Models;
+using Repositories;
+using Repositories.Implementation;
 
 namespace TranMinhThienWPF
 {
@@ -8,6 +11,13 @@ namespace TranMinhThienWPF
     {
         private readonly bool _isUpdate;
         private Order? _updateOrder;
+        private List<FlowerBouquet> _listFlowerBouquets = new();
+        private List<Customer> _listCustomer = new();
+        private List<OrderDetail> _listOrderDetail = new();
+        private ICustomerRepository _customerRepository = new CustomerRepository();
+        private IFlowerBouquetRepository _flowerBouquetRepository = new FlowerBouquetRepository();
+        private IOrderRepository _orderRepository = new OrderRepository();
+        private IOrderDetailRepository _orderDetailRepository = new OrderDetailRepository();
         
         public OrderEditor()
         {
@@ -22,20 +32,53 @@ namespace TranMinhThienWPF
             _updateOrder = updateOrder;
             _isUpdate = true;
         }
+
+        private void ShowAllFlower()
+        {
+            FlowerView.ItemsSource = _listFlowerBouquets;
+        }
+        private void ShowAllCustomer()
+        {
+            CustomerName.Items.Add("None");
+            foreach (var customer in _listCustomer)
+            {
+                CustomerName.Items.Add(customer.CustomerName);
+            }
+            
+        }
+        #region Controller
+
+        private void LoadFlower()
+        {
+            _listFlowerBouquets = _flowerBouquetRepository.GetAllFlower();
+        }
+        private void LoadCustomer()
+        {
+            _listCustomer = _customerRepository.GetAllCustomer();
+        }
+        private void LoadOderDetails()
+        {
+            
+        }
+        #endregion
+
+        #region Event
         private void Awake(object sender, RoutedEventArgs e)
         {
+            LoadCustomer();
+            LoadFlower();
+            LoadOderDetails();
+            ShowAllCustomer();
+            ShowAllFlower();
             if (_isUpdate)
             {
-                
+                LoadOderDetails();
             }
             else
             {
                 
             }
         }
-
-        #region Event
-
         private void OnClickSubmit(object sender, RoutedEventArgs e)
         {
             throw new System.NotImplementedException();
@@ -43,17 +86,17 @@ namespace TranMinhThienWPF
 
         private void OnClickCancel(object sender, RoutedEventArgs e)
         {
-            throw new System.NotImplementedException();
+           
         }
 
-        private void OnChangeSelectedOrder(object sender, SelectionChangedEventArgs e)
+        private void OnChangeSelectedFlower(object sender, SelectionChangedEventArgs e)
         {
-            throw new System.NotImplementedException();
+            
         }
 
         private void OnClickRemove(object sender, RoutedEventArgs e)
         {
-            throw new System.NotImplementedException();
+           
         }
 
         private void OnClickAdd(object sender, RoutedEventArgs e)
@@ -70,7 +113,12 @@ namespace TranMinhThienWPF
         {
             throw new System.NotImplementedException();
         }
-
+        private void OnChangeSelectedDetails(object sender, SelectionChangedEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
         #endregion
+
+        
     }
 }

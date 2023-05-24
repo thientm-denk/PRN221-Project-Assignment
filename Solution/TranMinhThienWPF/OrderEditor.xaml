@@ -39,9 +39,9 @@
 
                     <Separator Width="180" Margin="0,50,0,0"></Separator>
                     <TextBlock Margin="0,30,0,0" Padding="25,0,0,0" Foreground="White">Customer Name</TextBlock>
-                    <ComboBox Width="150" Margin="0,5,0,0"></ComboBox>
+                    <ComboBox Name="CustomerName" Width="150" Margin="0,5,0,0"></ComboBox>
                     <TextBlock Margin="0,15,0,0" Padding="25,0,0,0" Foreground="White">Sipped Date</TextBlock>
-                    <DatePicker Width="150" Margin="0,5,0,0" Background="Azure"></DatePicker>
+                    <DatePicker Name="ShipDate" Width="150" Margin="0,5,0,0" Background="Azure"></DatePicker>
                     <Button Content="Submit" Foreground="Azure" FontWeight="Medium"
                             Margin="0,20,0,0" BorderThickness="0" Click="OnClickSubmit">
                         <Button.Style>
@@ -162,18 +162,28 @@
                         </Button>
                         
                     </TextBlock>
-                    <ListView x:Name="OrderView" Background="#E5E8F5" Height="200" Width="500"
-                              SelectionChanged="OnChangeSelectedOrder">
+                    <ListView x:Name="FlowerView" Margin="0,30,0,0" Background="#E5E8F5" Height="200" Width="500"
+                              SelectionChanged="OnChangeSelectedFlower">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Oder ID" Width="50" DisplayMemberBinding="{Binding OrderId}" />
-                                <GridViewColumn Header="Oder Day" Width="125"
-                                                DisplayMemberBinding="{Binding OrderDate}" />
-                                <GridViewColumn Header="Shipped Day" Width="125"
-                                                DisplayMemberBinding="{Binding ShippedDate}" />
-                                <GridViewColumn Header="Total" Width="100" DisplayMemberBinding="{Binding Total}" />
-                                <GridViewColumn Header="Order Status" Width="100"
-                                                DisplayMemberBinding="{Binding OrderStatus}" />
+                                <GridViewColumn Header="ID" Width="30" DisplayMemberBinding="{Binding FlowerBouquetId}" />
+                                <GridViewColumn Header="Category" Width="60"
+                                                DisplayMemberBinding="{Binding CategoryId}" />
+                                <GridViewColumn Header="Name" Width="100"
+                                                DisplayMemberBinding="{Binding FlowerBouquetName}" />
+                                <GridViewColumn Header="Description" Width="140">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Description}" TextWrapping="Wrap" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="UnitPrice" Width="60"
+                                                DisplayMemberBinding="{Binding UnitPrice}" />
+                                <GridViewColumn Header="UnitsInStock" Width="80"
+                                                DisplayMemberBinding="{Binding UnitsInStock}" />
+                                <GridViewColumn Header="SupplierId" Width="80"
+                                                DisplayMemberBinding="{Binding SupplierId}" />
 
                             </GridView>
                         </ListView.View>
@@ -239,7 +249,7 @@
                         </Button>
                         
                     </TextBlock>
-                    <ListView x:Name="OrderDetailView" Background="#E5E8F5" Height="140" Width="500">
+                    <ListView x:Name="OrderDetailView" SelectionChanged="OnChangeSelectedDetails" Background="#E5E8F5" Height="140" Width="500">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Order ID" Width="50" DisplayMemberBinding="{Binding OrderId}" />
