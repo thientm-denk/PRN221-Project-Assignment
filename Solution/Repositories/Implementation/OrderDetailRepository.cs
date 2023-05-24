@@ -10,5 +10,10 @@ namespace Repositories.Implementation
         {
             return OderDetailDao.Instance.GetOrderDetailByOrderId(orderId);
         }
+
+        public void AddOrderDetails(List<OrderDetail> orderDetails)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

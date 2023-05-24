@@ -27,7 +27,7 @@ namespace DataAccessObject
             }
         }
 
-        private int AddOrder(Order order)
+        public int AddOrder(Order order)
         {
             var maxId = _context.Orders.Max(c => c.OrderId);
             maxId++;

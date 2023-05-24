@@ -30,7 +30,7 @@ namespace DataAccessObject
         {
             return _context.OrderDetails.Where(o => o.OrderId == orderId).ToList();
         }
-        private void AddOrderDetails(List<OrderDetail> orderDetails)
+        public void AddOrderDetails(List<OrderDetail> orderDetails)
         {
             foreach (var orderDetail in orderDetails)
             { 

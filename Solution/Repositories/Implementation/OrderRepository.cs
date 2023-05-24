@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using BussinessObject.Models;
 using DataAccessObject;
 
@@ -19,6 +20,22 @@ namespace Repositories.Implementation
         public void DeleteOrder(int id)
         {
             OrderDAO.Instance.DeleteOrder(id);
+        }
+
+        public int AddOrder(Order order)
+        {
+            return OrderDAO.Instance.AddOrder(order);
+        }
+
+        public int AddOrder(string customerId, DateTime? shippedDate, string total, string orderStatus, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int UpdateOrder(Order oldOrder, string? customerId, DateTime? shippedDate, string? total, string orderStatus,
+            out string message)
+        {
+            throw new NotImplementedException();
         }
     }
 }
