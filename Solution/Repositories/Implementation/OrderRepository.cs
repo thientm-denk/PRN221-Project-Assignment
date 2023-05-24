@@ -63,7 +63,7 @@ namespace Repositories.Implementation
             });
         }
 
-        public int UpdateOrder(Order oldOrder, int customerId, DateTime? shippedDate, string total,
+        public int UpdateOrder(Order oldOrder, int? customerId, DateTime? shippedDate, string total,
             string orderStatus,
             out string message)
         {
@@ -81,10 +81,10 @@ namespace Repositories.Implementation
                 return -1;
             }
             
-            int totalTmp;
+            decimal totalTmp;
             try
             {
-                totalTmp = int.Parse(total);
+                totalTmp = decimal.Parse(total);
             }
             catch (Exception e)
             {

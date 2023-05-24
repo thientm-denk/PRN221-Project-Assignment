@@ -15,5 +15,15 @@ namespace Repositories.Implementation
         {
             OderDetailDao.Instance.AddOrderDetails(orderDetails);
         }
+
+        public void UpdateOrderDetails(List<OrderDetail> orderDetails)
+        {
+            OderDetailDao.Instance.UpdateOrderDetails(orderDetails);
+        }
+
+        public List<OrderDetail> GetOrderDetailByOrderId(int orderId)
+        {
+           return  OderDetailDao.Instance.GetOrderDetailByOrderId(orderId);
+        }
     }
 }

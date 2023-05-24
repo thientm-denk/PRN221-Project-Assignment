@@ -39,5 +39,26 @@ namespace DataAccessObject
             }
             _context.SaveChanges();
         }
+        
+        public void UpdateOrderDetails(List<OrderDetail> orderDetails)
+        {
+            if (orderDetails.Count <= 0)
+            {
+                return;
+            }
+
+            var listOrder = _context.OrderDetails.Where(or => or.OrderId == orderDetails[0].OrderId).ToList();
+            foreach (var orderDetail in listOrder)
+            {
+                _context.Remove(orderDetail);
+            }
+            _context.SaveChanges();
+            foreach (var orderDetail in orderDetails)
+            { 
+                _context.OrderDetails.Add(orderDetail);
+             
+            }
+            _context.SaveChanges();
+        }
     }
 }

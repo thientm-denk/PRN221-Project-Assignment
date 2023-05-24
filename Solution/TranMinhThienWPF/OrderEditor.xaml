@@ -9,7 +9,7 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Loaded="Awake"
-        Unloaded="OnClickCancel">
+        Unloaded="OnUnload">
     <Border BorderThickness="2">
         <Border.BorderBrush>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">

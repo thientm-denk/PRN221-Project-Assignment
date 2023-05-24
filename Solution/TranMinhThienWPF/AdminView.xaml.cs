@@ -460,7 +460,16 @@ namespace TranMinhThienWPF
 
         private void OnClickUpdateOrder(object sender, RoutedEventArgs e)
         {
-            
+            if (OrderView.SelectedIndex != -1)
+            {
+                OrderEditor orderEditor = new OrderEditor(_listOrder[OrderView.SelectedIndex],OnFinishEditOrder);
+                orderEditor.Show();
+                Hide();
+            }
+            else
+            {
+                MessageBox.Show("Select a order");
+            }
         }
 
         private void OnClickAddNewOrder(object sender, RoutedEventArgs e)
