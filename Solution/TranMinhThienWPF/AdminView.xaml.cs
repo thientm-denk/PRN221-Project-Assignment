@@ -55,6 +55,7 @@ namespace TranMinhThienWPF
             CustomerFindType.Items.Add("By email");
             CustomerFindType.Items.Add("By city");
             CustomerFindType.Items.Add("By country");
+            CustomerFindType.SelectedIndex = 0;
         }
         #region View Manager
 
@@ -74,6 +75,7 @@ namespace TranMinhThienWPF
                 CustomerFindType.Items.Add("By email");
                 CustomerFindType.Items.Add("By city");
                 CustomerFindType.Items.Add("By country");
+                CustomerFindType.SelectedIndex = 0;
             }
         }
 
@@ -99,6 +101,11 @@ namespace TranMinhThienWPF
                 FlowerManagement.Visibility = Visibility.Visible;
                 _currentShow = ShowName.Flower;
                 LoadAndShowAllFlower();
+                FlowerSearchType.SelectedIndex = -1;
+                FlowerSearchType.Items.Clear();
+                FlowerSearchType.Items.Add("By Name");
+                FlowerSearchType.Items.Add("By Description");
+                FlowerSearchType.SelectedIndex = 0;
             }
         }
 
@@ -408,7 +415,7 @@ namespace TranMinhThienWPF
         {
             try
             {
-                _listFlower = _flowerBouquetRepository.FindFlower(0, SearchValueFlower.Text);
+                _listFlower = _flowerBouquetRepository.FindFlower(FlowerSearchType.SelectedIndex, SearchValueFlower.Text);
                 ShowAllFlower();
             }
             catch (Exception exception)

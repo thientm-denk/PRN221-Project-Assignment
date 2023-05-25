@@ -67,6 +67,10 @@ namespace DataAccessObject
         {
             return _context.FlowerBouquets.Where(cus => cus.FlowerBouquetName.ToUpper().Contains(name.ToUpper())).ToList();
         }
+        public List<FlowerBouquet> GetCustomerDes(string description)
+        {
+            return _context.FlowerBouquets.Where(cus => cus.Description.ToUpper().Contains(description.ToUpper())).ToList();
+        }
 
         public void UpdateFlower(FlowerBouquet flower)
         {

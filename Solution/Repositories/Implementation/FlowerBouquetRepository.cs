@@ -136,7 +136,11 @@ namespace Repositories.Implementation
                 {
                     return FlowerBouquetDAO.Instance.GetCustomerByName(value);
                 }
-              
+                case 1:
+                {
+                    return FlowerBouquetDAO.Instance.GetCustomerDes(value);
+                }
+             
             }
 
             return null;
