@@ -263,14 +263,7 @@ namespace Repositories.Implementation
             {
                 case 0:
                 {
-                    var newList = new List<Customer>();
-                    var customer = CustomerDao.Instance.GetCustomerById(int.Parse(value));
-                    if (customer !=null)
-                    {
-                        newList.Add(customer);
-                    }
-              
-                    return newList;
+                    return CustomerDao.Instance.GetCustomerByName(value);
                 }
                 case 1:
                 {
@@ -286,7 +279,14 @@ namespace Repositories.Implementation
                 }
                 case 4:
                 {
-                    return CustomerDao.Instance.GetCustomerByName(value);
+                    var newList = new List<Customer>();
+                    var customer = CustomerDao.Instance.GetCustomerById(int.Parse(value));
+                    if (customer !=null)
+                    {
+                        newList.Add(customer);
+                    }
+              
+                    return newList;
                 }
             }
 

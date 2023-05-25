@@ -36,13 +36,26 @@ namespace TranMinhThienWPF
         public AdminView()
         {
             InitializeComponent();
+            // ResetDisplay();
+            // CustomerBtn.Style = (Style)Application.Current.Resources["MenuButtonActive"];
+            // _currentShow = ShowName.Customer;
+            // CustomerManagement.Visibility = Visibility.Visible;
+            // LoadAndShowAllCustomer();
+        }
+        private void Awake(object sender, RoutedEventArgs e)
+        {
             ResetDisplay();
             CustomerBtn.Style = (Style)Application.Current.Resources["MenuButtonActive"];
             _currentShow = ShowName.Customer;
             CustomerManagement.Visibility = Visibility.Visible;
             LoadAndShowAllCustomer();
+            CustomerFindType.SelectedIndex = -1;
+            CustomerFindType.Items.Clear();
+            CustomerFindType.Items.Add("By name");
+            CustomerFindType.Items.Add("By email");
+            CustomerFindType.Items.Add("By city");
+            CustomerFindType.Items.Add("By country");
         }
-
         #region View Manager
 
         // View event
@@ -55,6 +68,12 @@ namespace TranMinhThienWPF
                 _currentShow = ShowName.Customer;
                 CustomerManagement.Visibility = Visibility.Visible;
                 LoadAndShowAllCustomer();
+                CustomerFindType.SelectedIndex = -1;
+                CustomerFindType.Items.Clear();
+                CustomerFindType.Items.Add("By name");
+                CustomerFindType.Items.Add("By email");
+                CustomerFindType.Items.Add("By city");
+                CustomerFindType.Items.Add("By country");
             }
         }
 
@@ -297,7 +316,7 @@ namespace TranMinhThienWPF
         {
             try
             {
-                _listCustomer = _customerRepository.FindCustomer(4, SearchValueCustomer.Text);
+                _listCustomer = _customerRepository.FindCustomer(CustomerFindType.SelectedIndex, SearchValueCustomer.Text);
                 ShowAllCustomer();
             }
             catch (Exception exception)
@@ -570,5 +589,7 @@ namespace TranMinhThienWPF
         }
 
         #endregion
+
+      
     }
 }
