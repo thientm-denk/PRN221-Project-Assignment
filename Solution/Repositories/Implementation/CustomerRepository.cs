@@ -37,7 +37,7 @@ namespace Repositories.Implementation
         public Customer Login(string email, string password)
         {
             // Check for admin
-            if (false)
+            if (CustomerDao.Instance.CheckAdminLogin(email, password))
             {
                 return new Customer()
                 {

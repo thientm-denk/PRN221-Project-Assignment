@@ -24,7 +24,10 @@ namespace TranMinhThienWPF
                 {
                     if (user.CustomerId == -1)
                     {
-                        MessageBox.Show("Hello Admin", "Hi");
+                        
+                        AdminView adminView = new AdminView();
+                        adminView.Show();
+                        Close();
                     }
                     else
                     {

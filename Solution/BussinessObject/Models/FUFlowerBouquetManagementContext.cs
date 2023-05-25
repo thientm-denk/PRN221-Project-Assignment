@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
 
 #nullable disable
 
@@ -28,8 +30,18 @@ namespace BussinessObject.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("server =(local); database = FUFlowerBouquetManagement;uid=sa;pwd=123;");
+                var connectString = "server =(local); database = FUFlowerBouquetManagement;uid=sa;pwd=123;";
+                using (StreamReader r = new StreamReader("appsettings.json"))
+                {
+                    string json = r.ReadToEnd();
+                    IConfiguration config = new ConfigurationBuilder()
+                        .SetBasePath(Directory.GetCurrentDirectory())
+                        .AddJsonFile("appsettings.json", true, true)
+                        .Build();
+                    connectString = config["ConnectionStrings:FUFlowerBouquetManagementDB"];
+                }
+
+                optionsBuilder.UseSqlServer(connectString);
             }
         }
 
