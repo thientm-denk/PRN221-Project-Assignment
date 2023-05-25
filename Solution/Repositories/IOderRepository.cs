@@ -14,5 +14,6 @@ namespace Repositories
         
         public int UpdateOrder(Order oldOrder,int ?customerId, DateTime? shippedDate, string total, string orderStatus,  out string message);
 
+        public List<Order> GetDataInRange(DateTime startTime, DateTime endTime, out string message);
     }
 }

@@ -27,7 +27,7 @@ namespace Repositories.Implementation
             return OrderDAO.Instance.AddOrder(order);
         }
 
-        public int AddOrder(int ?customerId, DateTime? shippedDate, string total, string orderStatus,
+        public int AddOrder(int? customerId, DateTime? shippedDate, string total, string orderStatus,
             out string message)
         {
             message = "";
@@ -36,12 +36,13 @@ namespace Repositories.Implementation
                 message = "Status cannot empty";
                 return -1;
             }
+
             if (string.IsNullOrEmpty(total))
             {
                 message = "Total cannot empty";
                 return -1;
             }
-            
+
             decimal totalTmp = 0;
             try
             {
@@ -70,17 +71,18 @@ namespace Repositories.Implementation
             var orderUpdate = oldOrder;
 
             message = "";
-            if (string.IsNullOrEmpty(orderStatus) )
+            if (string.IsNullOrEmpty(orderStatus))
             {
                 message = "Status cannot empty";
                 return -1;
             }
+
             if (string.IsNullOrEmpty(total))
             {
                 message = "Total cannot empty";
                 return -1;
             }
-            
+
             decimal totalTmp;
             try
             {
@@ -99,6 +101,33 @@ namespace Repositories.Implementation
             orderUpdate.Total = totalTmp;
             OrderDAO.Instance.Update(orderUpdate);
             return orderUpdate.OrderId;
+        }
+
+        public List<Order> GetDataInRange(DateTime startTime, DateTime endTime, out string message)
+        {
+            message = "";
+            List<Order> listResult = new List<Order>();
+            if (string.IsNullOrEmpty(startTime.ToString()) || string.IsNullOrEmpty(endTime.ToString()))
+            {
+                message = "Please input date time";
+                return listResult;
+            }
+            if (startTime > endTime)
+            {
+                message = "Start Time must before end time";
+                return listResult;
+            }
+
+            try
+            {
+                listResult = OrderDAO.Instance.GetOrderInRange(startTime, endTime);
+            }
+            catch (Exception e)
+            {
+                message = e.Message;
+            }
+
+            return listResult;
         }
     }
 }

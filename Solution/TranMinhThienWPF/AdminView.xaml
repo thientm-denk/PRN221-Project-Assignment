@@ -55,6 +55,9 @@
                     <Button x:Name="OrderBtn" Style="{StaticResource MenuBtn}" Click="OnClickOder">
                         <TextBlock Text="Order" Style="{StaticResource MenuButtonText}" HorizontalAlignment="Center"></TextBlock>
                     </Button>
+                    <Button x:Name="ReportBtn" Style="{StaticResource MenuBtn}" Click="OnClickReport">
+                        <TextBlock Text="Report" Style="{StaticResource MenuButtonText}" HorizontalAlignment="Center"></TextBlock>
+                    </Button>
                 </StackPanel>
             </Border>
 
@@ -409,9 +412,9 @@
                 </StackPanel>
             </Border>
 
-            <Border Grid.Column="1" Grid.ColumnSpan="2" Name="OrderManagement">
+            <Border Grid.Column="1" Grid.ColumnSpan="2" Name="OrderManagement" Visibility="Collapsed">
                 <StackPanel>
-                     <TextBlock HorizontalAlignment="Center" Margin="0,30,0,0">
+                    <TextBlock HorizontalAlignment="Center" Margin="0,30,0,0">
                         <TextBox x:Name="SearchValueOrder" TextAlignment="Left" FontSize="15" FontWeight="Medium"
                                  Foreground="Azure"
                                  Background="Transparent" CaretBrush="Linen" BorderBrush="#CA9CCA"
@@ -602,6 +605,97 @@
                     </ListView>
                 </StackPanel>
 
+            </Border>
+            
+            <Border Grid.Column="1" Grid.ColumnSpan="2" Name="ReportManagement" Visibility="Visible">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="15,15,0,0">
+                        <TextBlock Text="Start day" Foreground="White" FontSize="15"/>
+                        <DatePicker Name="ReportStart" Width="100" Background="White" Margin="10,0,0,0"/>
+                        <Button Content="Search" Foreground="Azure" FontWeight="Light"
+                                Margin="200,0,0,0" BorderThickness="0" Click="OnClickSearchReport">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="#008FFE"></Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="true">
+                                            <Setter Property="Background" Value="#C597C5"></Setter>
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="true">
+                                            <Setter Property="Background" Value="#FFE7FF"></Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+
+                            </Button.Style>
+
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Width="100" Height="20" Background="{TemplateBinding Background}"
+                                            CornerRadius="10">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="15,15,0,0">
+                        <TextBlock Text="End day" Foreground="White" FontSize="15"/>
+                        <DatePicker Name="ReportEnd" Width="100" Background="White" Margin="15,0,0,0"/>
+                        <Button Content="Sort" Foreground="Azure" FontWeight="Light"
+                                Margin="200,0,0,0" BorderThickness="0" Click="OnClickSortReport">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="#008FFE"></Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="true">
+                                            <Setter Property="Background" Value="#C597C5"></Setter>
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="true">
+                                            <Setter Property="Background" Value="#FFE7FF"></Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Width="100" Height="20" Background="{TemplateBinding Background}"
+                                            CornerRadius="10">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </StackPanel>
+                    <ListView x:Name="ReportView" Background="#E5E8F5" Height="400" Width="500"
+                              SelectionChanged="OnChangeSelectedOrder" Margin="0,20,0,0">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Oder ID" Width="50" DisplayMemberBinding="{Binding OrderId}" />
+                                <GridViewColumn Header="Cus ID" Width="50" DisplayMemberBinding="{Binding CustomerId}" />
+                                <GridViewColumn Header="Order Date" Width="100">
+                                    <GridViewColumn.DisplayMemberBinding>
+                                        <Binding Path="OrderDate" StringFormat="dd/MM/yyyy" />
+                                    </GridViewColumn.DisplayMemberBinding>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Shipped Day" Width="100"
+                                                DisplayMemberBinding="{Binding ShippedDate}" />
+                                <GridViewColumn Header="Total" Width="100" DisplayMemberBinding="{Binding Total}" />
+                                <GridViewColumn Header="Order Status" Width="100"
+                                                DisplayMemberBinding="{Binding OrderStatus}" />
+
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    
+                    <StackPanel Margin="0,20,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock Text="Total Profit: "  Foreground="White" FontSize="20"></TextBlock>
+                        <TextBlock Name="TotalProfit" Text="0" Margin="5,0,0,0" Foreground="White" FontSize="20"></TextBlock>
+                    </StackPanel>
+                </StackPanel>
             </Border>
         </Grid>
     </Border>
