@@ -505,11 +505,7 @@ namespace TranMinhThienWPF
                 ShowOrderDetail();
             }
         }
-
-        private void OnClickSearchOrder(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         private void OnClickShowAllOrder(object sender, RoutedEventArgs e)
         {

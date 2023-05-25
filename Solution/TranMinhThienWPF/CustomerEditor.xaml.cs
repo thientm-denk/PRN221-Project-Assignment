@@ -13,10 +13,10 @@ namespace TranMinhThienWPF
     /// </summary>
     public partial class CustomerEditor : Window
     {
-        private Customer _updateCustomer;
-        private Action<Customer> _onFinish;
+        private readonly Customer _updateCustomer;
+        private readonly Action<Customer> _onFinish;
         private bool _isUpdate;
-        private ICustomerRepository _customerRepository = new CustomerRepository();
+        private readonly ICustomerRepository _customerRepository = new CustomerRepository();
 
         public CustomerEditor()
         {
