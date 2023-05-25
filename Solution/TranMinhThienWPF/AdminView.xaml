@@ -412,7 +412,7 @@
                 </StackPanel>
             </Border>
 
-            <Border Grid.Column="1" Grid.ColumnSpan="2" Name="OrderManagement" Visibility="Collapsed">
+            <Border Grid.Column="1" Grid.ColumnSpan="2" Name="OrderManagement" Visibility="Visible">
                 <StackPanel>
                     <TextBlock HorizontalAlignment="Center" Margin="0,30,0,0">
                         <TextBox x:Name="SearchValueOrder" TextAlignment="Left" FontSize="15" FontWeight="Medium"
@@ -572,13 +572,15 @@
                             <GridView>
                                 <GridViewColumn Header="Oder ID" Width="50" DisplayMemberBinding="{Binding OrderId}" />
                                 <GridViewColumn Header="Cus ID" Width="50" DisplayMemberBinding="{Binding CustomerId}" />
-                                <GridViewColumn Header="Order Day" Width="125">
+                                <GridViewColumn Header="Order Day" Width="100">
                                     <GridViewColumn.DisplayMemberBinding>
                                         <Binding Path="OrderDate" StringFormat="dd/MM/yyyy" />
                                     </GridViewColumn.DisplayMemberBinding>
                                 </GridViewColumn>
-                                <GridViewColumn Header="Shipped Day" Width="125"
-                                                DisplayMemberBinding="{Binding ShippedDate}" />
+                                <GridViewColumn Header="Shipped Day" Width="100"><GridViewColumn.DisplayMemberBinding>
+                                        <Binding Path="ShippedDate" StringFormat="dd/MM/yyyy" />
+                                    </GridViewColumn.DisplayMemberBinding>
+                                </GridViewColumn>
                                 <GridViewColumn Header="Total" Width="100" DisplayMemberBinding="{Binding Total}" />
                                 <GridViewColumn Header="Order Status" Width="100"
                                                 DisplayMemberBinding="{Binding OrderStatus}" />
@@ -606,12 +608,12 @@
                 </StackPanel>
 
             </Border>
-            
-            <Border Grid.Column="1" Grid.ColumnSpan="2" Name="ReportManagement" Visibility="Visible">
+
+            <Border Grid.Column="1" Grid.ColumnSpan="2" Name="ReportManagement" Visibility="Collapsed">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="15,15,0,0">
-                        <TextBlock Text="Start day" Foreground="White" FontSize="15"/>
-                        <DatePicker Name="ReportStart" Width="100" Background="White" Margin="10,0,0,0"/>
+                        <TextBlock Text="Start day" Foreground="White" FontSize="15" />
+                        <DatePicker Name="ReportStart" Width="100" Background="White" Margin="10,0,0,0" />
                         <Button Content="Search" Foreground="Azure" FontWeight="Light"
                                 Margin="200,0,0,0" BorderThickness="0" Click="OnClickSearchReport">
                             <Button.Style>
@@ -641,8 +643,8 @@
                         </Button>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="15,15,0,0">
-                        <TextBlock Text="End day" Foreground="White" FontSize="15"/>
-                        <DatePicker Name="ReportEnd" Width="100" Background="White" Margin="15,0,0,0"/>
+                        <TextBlock Text="End day" Foreground="White" FontSize="15" />
+                        <DatePicker Name="ReportEnd" Width="100" Background="White" Margin="15,0,0,0" />
                         <Button Content="Sort" Foreground="Azure" FontWeight="Light"
                                 Margin="200,0,0,0" BorderThickness="0" Click="OnClickSortReport">
                             <Button.Style>
@@ -690,9 +692,9 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    
+
                     <StackPanel Margin="0,20,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
-                        <TextBlock Text="Total Profit: "  Foreground="White" FontSize="20"></TextBlock>
+                        <TextBlock Text="Total Profit: " Foreground="White" FontSize="20"></TextBlock>
                         <TextBlock Name="TotalProfit" Text="0" Margin="5,0,0,0" Foreground="White" FontSize="20"></TextBlock>
                     </StackPanel>
                 </StackPanel>

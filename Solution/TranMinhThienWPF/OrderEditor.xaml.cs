@@ -174,6 +174,7 @@ namespace TranMinhThienWPF
             }
             catch (Exception exception)
             {
+                _orderRepository.DeleteOrder(orderId);
                 MessageBox.Show(exception.Message, "ERROR");
                 return;
             }
@@ -210,10 +211,12 @@ namespace TranMinhThienWPF
 
             try
             {
+                
                 _orderDetailRepository.UpdateOrderDetails(_listOrderDetail);
             }
             catch (Exception exception)
             {
+                _orderRepository.DeleteOrder(orderId);
                 MessageBox.Show(exception.Message, "ERROR");
                 return;
             }
